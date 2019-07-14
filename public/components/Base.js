@@ -23,7 +23,7 @@ class Base extends React.Component {
     {
         
         let title = "My Custom Table";
-        let myLabels = ['edad','genero','peso'];
+        let myLabels = [{'type':'numeric','tag':'edad'},{'type':'categorical','tag':'genero'},{'type':'categorical','tag':'peso'}];
         let myData = [
                     [435,'M',212.25],
                     [55,'F',22.3],

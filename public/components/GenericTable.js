@@ -21,7 +21,7 @@ class GenericTable extends ComponentGeneric {
            <tr> 
            {  labels.map((element,index) =>{
                  return(
-                    <th key={index} > <a className="btn btn-info btn-sm" onClick={() => this.sortByCol(index)} ><i className="fa fa-edit fa-fw"></i></a> {element}</th>
+                    <th key={index} > <a className="btn btn-info btn-sm" onClick={() => this.sortByCol(index)} ><i className="fa fa-edit fa-fw"></i></a> {element.tag}</th>
                  )
               })
            }
