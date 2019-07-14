@@ -21,10 +21,19 @@ class Base extends React.Component {
     
     creatingReport()
     {
-        //Dependiendo de que reporte quiero
+        
+        let title = "My Custom Table";
         let myLabels = ['edad','genero','peso'];
-        let myData = [[435,'M',212.25],[55,'F',22.3],[455,'I',122.69]];
-        return (<BaseTable labels={myLabels} matrix={myData}></BaseTable>)
+        let myData = [
+                    [435,'M',212.25],
+                    [55,'F',22.3],
+                    [455,'I',122.69]
+                ];
+        return (<div>
+            <GenericTable title={title} labels={myLabels} feed={myData}></GenericTable>  
+            <GenericTable title={"Custom Table 2"} labels={myLabels} feed={myData}></GenericTable>
+            <GenericTable title={"Custom Table e"} labels={myLabels} feed={myData}></GenericTable>
+            </div>)
     }
     render()
     {

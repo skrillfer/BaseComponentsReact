@@ -24,10 +24,10 @@
          <tr> 
          {  labels.map((element,index) =>{
                return(
-                  <th key={index} >{element}</th>
+                  <th key={index} >  {element}</th>
                )
             })
-         }
+         } 
          </tr>)
    }
 
@@ -71,9 +71,7 @@
                   </table>
                </div> 
                
-               </div>
-            
-            
+            </div>  
       )
    }
 }
