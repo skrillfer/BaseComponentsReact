@@ -29,11 +29,11 @@ class Base extends React.Component {
                     [55,'F',22.3],
                     [455,'I',122.69]
                 ];
-        return (<div>
+        return <div>
             <GenericTable title={title} labels={myLabels} feed={myData}></GenericTable>  
             <GenericTable title={"Custom Table 2"} labels={myLabels} feed={myData}></GenericTable>
             <GenericTable title={"Custom Table e"} labels={myLabels} feed={myData}></GenericTable>
-            </div>)
+            </div>
     }
     render()
     {
