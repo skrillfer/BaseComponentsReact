@@ -5,6 +5,19 @@ class SurveyHis extends ComponentGeneric {
 
   componentDidMount() {
     var dataSET = this.validateDataForChart();
+    new Chart(document.getElementById("bar_chart"), {
+      type: 'bar',
+      data: dataSET,
+      options: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: this.state.title
+        }
+      }
+    });
     /*new Chart(document.getElementById("bar_chart"), {
        type: 'bar',
        data: {

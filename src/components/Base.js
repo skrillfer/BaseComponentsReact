@@ -40,7 +40,7 @@ class Base extends React.Component {
             ["PS4",400,"Febrero"],
         ]
         
-        let labels2= [ {"tag":"Caracteristica","type":"categoric","serie":"true"},
+        /*let labels2= [ {"tag":"Caracteristica","type":"categoric","serie":"true"},
           {"tag":"American Express","type":"numeric","serie":"false"},
           {"tag":"MasterCard","type":"numeric","serie":"false"},
           {"tag":"PayPal","type":"numeric","serie":"false"},
@@ -52,7 +52,27 @@ class Base extends React.Component {
             ["Transparencia",90,90,75,89],
             ["Soporte",67,78,85,83],
             ["Regalias",32,48,55,13],
+        ]*/
+
+        let labels2= [ {"tag":"gasto","type":"numeric","serie":"false"},
+            {"tag":"mes","type":"categoric","serie":"false"},
         ]
+
+        let feed2 = [
+            [5250,"Enero"],
+            [4350,"Febrero"],
+            [3400,"Marzo"],
+            [1350,"Abril"],
+            [3130,"Mayo"],
+            [7899,"Junio"],
+            [5600,"Julio"],
+            [6600,"Agosto"],
+            [4210,"Septiembre"],
+            [5600,"Octubre"],
+            [1600,"Noviembre"],
+            [28600,"Diciembre"],
+        ]
+
         return <div>
             <GenericTable title={title} labels={labels} feed={feed}></GenericTable>  
             <SurveyHis   title={'Simple Bar Chart'} labels={labels2} feed={feed2} > </SurveyHis>
