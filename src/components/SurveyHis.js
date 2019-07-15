@@ -25,7 +25,7 @@ class SurveyHis extends ComponentGeneric {
     render() {
         return (
            
-              <div className="card" style={{"maxWidth":"50rem"}}>
+              <div className="card" style={{"maxWidth":"40rem"}}>
                  <h4 className="card-title">{this.state.title}</h4>
   
                  <div className="card-header">

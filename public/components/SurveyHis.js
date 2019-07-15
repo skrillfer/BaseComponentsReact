@@ -24,7 +24,7 @@ class SurveyHis extends ComponentGeneric {
     return React.createElement("div", {
       className: "card",
       style: {
-        "maxWidth": "50rem"
+        "maxWidth": "40rem"
       }
     }, React.createElement("h4", {
       className: "card-title"

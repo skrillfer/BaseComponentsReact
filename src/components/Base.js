@@ -54,11 +54,11 @@ class Base extends React.Component {
             ["Regalias",32,48,55,13],
         ]
 
-        /*let labels2= [ {"tag":"gasto","type":"numeric","serie":"false"},
+        let labels3= [ {"tag":"gasto","type":"numeric","serie":"false"},
             {"tag":"mes","type":"categoric","serie":"false"},
         ]
 
-        let feed2 = [
+        let feed3 = [
             [5250,"Enero"],
             [4350,"Febrero"],
             [3400,"Marzo"],
@@ -71,11 +71,12 @@ class Base extends React.Component {
             [5600,"Octubre"],
             [1600,"Noviembre"],
             [28600,"Diciembre"],
-        ]*/
+        ]
 
         return <div>
             <GenericTable title={title} labels={labels} feed={feed}></GenericTable>  
             <SurveyHis   title={'Simple Bar Chart'} labels={labels2} feed={feed2} > </SurveyHis>
+            <SurveyPie   title={'Simple Pie Chart'} labels={labels3} feed={feed3} > </SurveyPie>
             </div>
     }
     render()
