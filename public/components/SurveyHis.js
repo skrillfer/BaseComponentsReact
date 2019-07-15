@@ -5,26 +5,26 @@ class SurveyHis extends ComponentGeneric {
 
   componentDidMount() {
     var dataSET = this.validateDataForChart();
-    new Chart(document.getElementById("bar_chart"), {
-      type: 'bar',
-      data: {
-        labels: dataSET[0],
-        datasets: [{
-          label: "Population (millions)",
-          backgroundColor: this.generateRandomColor(dataSET[1].length),
-          data: dataSET[1]
-        }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        title: {
-          display: true,
-          text: this.state.title
-        }
-      }
-    });
+    /*new Chart(document.getElementById("bar_chart"), {
+       type: 'bar',
+       data: {
+         labels: dataSET[0],
+         datasets: [
+           {
+             label: "Population (millions)",
+             backgroundColor: this.generateRandomColor(dataSET[1].length),
+             data: dataSET[1]
+           }
+         ]
+       },
+       options: {
+         legend: { display: false },
+         title: {
+           display: true,
+           text: this.state.title
+         }
+       }
+    });*/
   }
 
   render() {

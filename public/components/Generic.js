@@ -13,10 +13,22 @@ class ComponentGeneric extends React.Component {
     let colors = [];
 
     for (let i = 0; i < size; i += 1) {
-      colors.push('#' + (Math.random() * 0xFFFFFF << 0).toString(16));
+      colors.push(this.generateOnlyColor());
     }
 
     return colors;
+  }
+
+  generateOnlyColor() {
+    return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+  }
+
+  getColumnIndexOf(n) {
+    try {
+      return this.state.feed.map(x => x[n]);
+    } catch (error) {
+      return 0;
+    }
   }
 
   getDimensions() {
@@ -28,10 +40,29 @@ class ComponentGeneric extends React.Component {
   }
 
   validateDataForChart() {
-    var dataSET = [];
-    let dataSeries = this.getSeries();
+    var dataSET = {};
+    var data_set = [];
+    let seriesObject = this.getSeries(); //Representa los LABELS
 
-    if (dataSeries.length > 0) {} else {
+    let dataSeries = seriesObject.series;
+
+    if (dataSeries.length > 0) {
+      //dataSET['labels']=dataSeries;
+      console.log(seriesObject.index);
+      var array_data = [];
+      this.state.labels.map((val, colum) => {
+        if (colum != seriesObject.index) {
+          array_data.push({
+            label: val.tag,
+            backgroundColor: this.generateOnlyColor(),
+            borderColor: this.generateOnlyColor(),
+            borderWidth: 1,
+            data: this.getColumnIndexOf(colum)
+          });
+        }
+      });
+      console.log(array_data);
+    } else {
       let dimFeed = this.getDimensions();
 
       if (dimFeed.length > 1) {
@@ -45,6 +76,14 @@ class ComponentGeneric extends React.Component {
     }
 
     return dataSET;
+  }
+
+  getValueNumericIndexOf(row, col) {
+    try {
+      return parseInt(this.state.feed[(row, col)]);
+    } catch (error) {
+      return 0;
+    }
   }
 
   getValuesForChart(typeParam) {
@@ -75,6 +114,7 @@ class ComponentGeneric extends React.Component {
 
   getSeries() {
     var seriesLabels = [];
+    var seriesIndex = -1;
     var indexArray = [];
     this.state.labels.map((element, index) => {
       if (element.serie == 'true') {
@@ -83,13 +123,16 @@ class ComponentGeneric extends React.Component {
     });
 
     if (indexArray.length > 0) {
+      seriesIndex = indexArray[0];
       seriesLabels = this.state.feed.map(feedItem => {
         return feedItem[indexArray[0]];
       });
     }
 
-    console.log(seriesLabels);
-    return seriesLabels;
+    return {
+      'series': seriesLabels,
+      'index': seriesIndex
+    };
   }
 
 }

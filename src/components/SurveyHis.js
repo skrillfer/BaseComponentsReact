@@ -7,7 +7,7 @@ class SurveyHis extends ComponentGeneric {
    {
       var dataSET=this.validateDataForChart();
 
-      new Chart(document.getElementById("bar_chart"), {
+      /*new Chart(document.getElementById("bar_chart"), {
          type: 'bar',
          data: {
            labels: dataSET[0],
@@ -26,7 +26,7 @@ class SurveyHis extends ComponentGeneric {
              text: this.state.title
            }
          }
-     });
+     });*/
    }
 
    

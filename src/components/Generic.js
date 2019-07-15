@@ -14,9 +14,23 @@ class ComponentGeneric extends React.Component {
       let colors= [];
 
       for (let i = 0; i < size; i+=1) {
-        colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+        colors.push(this.generateOnlyColor());
       }
       return colors;
+    }
+
+    generateOnlyColor()
+    {
+      return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    }
+
+    getColumnIndexOf(n)
+    {
+      try {
+        return this.state.feed.map(x=> x[n]);  
+      } catch (error) {
+        return 0;
+      }
     }
 
     getDimensions(){
@@ -32,25 +46,37 @@ class ComponentGeneric extends React.Component {
       var dataSET={};
       var data_set=[];
 
+      
       let seriesObject=this.getSeries();
+      
+      //Representa los LABELS
       let dataSeries = seriesObject.series;
       
       if(dataSeries.length>0){
         //dataSET['labels']=dataSeries;
         
-        var objectSetArray = [];
-        
-        this.feed.map(
-          (item,row)=>{
-            for (let colum = 0; i < dataSeries.length; colum++) {
-              if(i!=dataSeries.index){
-                this.getValueNumericIndexOf(row,colum);
-              }
-              
+        console.log(seriesObject.index);
+        var array_data = [];
+
+        this.state.labels.map(
+          (val,colum)=>{
+            if(colum!=seriesObject.index){
+              array_data.push(
+                {
+                  label : val.tag,
+                  backgroundColor : this.generateOnlyColor(),
+                  borderColor: this.generateOnlyColor(),
+                  borderWidth : 1,
+                  data : this.getColumnIndexOf(colum),
+                  
+                }
+              );
             }
           }
         );
         
+        console.log(array_data);
+    
       }else
       {
         let dimFeed=this.getDimensions();
