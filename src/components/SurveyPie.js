@@ -5,10 +5,9 @@ class SurveyHis extends ComponentGeneric {
   
    componentDidMount()
    {
-      var dataSET=this.validateDataForChart('');
-
-      new Chart(document.getElementById("bar_"+this.state.key), {
-        type: 'bar',
+      var dataSET=this.validateDataForChart('pie');
+      new Chart(document.getElementById("pie_"+this.state.key), {
+        type: 'pie',
         data: dataSET,
         options: {
           legend: { display: true },
@@ -31,7 +30,7 @@ class SurveyHis extends ComponentGeneric {
                  <div className="card-header">
                  </div>
                  <div className="card-body">
-                  <canvas id={"bar_"+this.state.key} width="800" height="450"></canvas>
+                  <canvas id={"pie_"+this.state.key} width="800" height="450"></canvas>
 
                  </div> 
                  

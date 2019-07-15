@@ -5,8 +5,26 @@ class ComponentGeneric extends React.Component {
       labels: this.props.labels,
       feed: this.props.feed,
       title: this.props.title,
-      dataSET: []
+      key: this.makeId(3)
     };
+    this.uniqueArrayColor = [];
+  }
+
+  makeId(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+  }
+
+  setUniqueArrayColor(size) {
+    if (this.uniqueArrayColor.length != 0) return;
+    this.uniqueArrayColor = this.generateRandomColor(size);
   }
 
   generateRandomColor(size) {
@@ -20,7 +38,18 @@ class ComponentGeneric extends React.Component {
   }
 
   generateOnlyColor() {
-    return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    var colorGenerated = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+
+    while (!this.testParseColor(colorGenerated)) {
+      colorGenerated = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+
+    return colorGenerated;
+  }
+
+  testParseColor(colorGenerated) {
+    var isOk = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(colorGenerated);
+    return isOk;
   }
 
   getAllColumnsIndexOf(n) {
@@ -39,7 +68,8 @@ class ComponentGeneric extends React.Component {
     }
   }
 
-  validateDataForChart() {
+  validateDataForChart(typeChart) {
+    this.uniqueArrayColor = [];
     var dataSET = {
       labels: null,
       datasets: null
@@ -53,13 +83,25 @@ class ComponentGeneric extends React.Component {
       dataSET.labels = dataSeries;
       this.state.labels.map((val, colum) => {
         if (colum != seriesObject.index) {
-          array_data.push({
-            label: val.tag,
-            backgroundColor: this.generateOnlyColor(),
-            borderColor: this.generateOnlyColor(),
-            borderWidth: 1,
-            data: this.getAllColumnsIndexOf(colum)
-          });
+          if (typeChart == "pie" || typeChart == "doughnut") {
+            let vdata = this.getAllColumnsIndexOf(colum);
+            this.setUniqueArrayColor(vdata.length);
+            array_data.push({
+              label: val.tag,
+              backgroundColor: this.uniqueArrayColor,
+              borderColor: this.generateOnlyColor(),
+              borderWidth: 1,
+              data: vdata
+            });
+          } else {
+            array_data.push({
+              label: val.tag,
+              backgroundColor: this.generateOnlyColor(),
+              borderColor: this.generateOnlyColor(),
+              borderWidth: 1,
+              data: this.getAllColumnsIndexOf(colum)
+            });
+          }
         }
       });
       dataSET.datasets = array_data;
@@ -79,6 +121,7 @@ class ComponentGeneric extends React.Component {
       }
     }
 
+    console.log(dataSET);
     return dataSET;
   }
 
@@ -100,13 +143,11 @@ class ComponentGeneric extends React.Component {
     });
 
     if (indexArray.length > 0) {
-      console.log(indexArray);
       dataLabels = this.state.feed.map(feedItem => {
         return feedItem[indexArray[0]];
       });
     }
 
-    console.log(dataLabels);
     return dataLabels;
   }
 
@@ -129,11 +170,6 @@ class ComponentGeneric extends React.Component {
     if (indexArray.length > 0) {
       seriesIndex = indexArray[0];
       seriesLabels = this.getAllColumnsIndexOf(seriesIndex);
-      /*seriesLabels=this.state.feed.map(
-        feedItem=>{
-          return feedItem[indexArray[0]]
-        }
-      );*/
     }
 
     return {
