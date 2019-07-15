@@ -27,12 +27,7 @@ class GenericTable extends ComponentGeneric {
     return React.createElement("tr", null, labels.map((element, index) => {
       return React.createElement("th", {
         key: index
-      }, " ", React.createElement("a", {
-        className: "btn btn-info btn-sm",
-        onClick: () => this.sortByCol(index)
-      }, React.createElement("i", {
-        className: "fa fa-edit fa-fw"
-      })), " ", element.tag);
+      }, " ", element.tag);
     }));
   }
 

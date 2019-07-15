@@ -19,31 +19,52 @@ class Base extends React.Component {
   }
 
   creatingReport() {
-    let title = "My Custom Table";
-    let myLabels = [{
-      'type': 'numeric',
-      'tag': 'edad'
+    let title = "Ventas del Anio 2019";
+    let labels = [{
+      "tag": "producto",
+      "type": "categoric",
+      "serie": "false"
     }, {
-      'type': 'categorical',
-      'tag': 'genero'
+      "tag": "precio",
+      "type": "numeric",
+      "serie": "false"
     }, {
-      'type': 'categorical',
-      'tag': 'peso'
+      "tag": "mes",
+      "type": "categoric",
+      "serie": "false"
     }];
-    let myData = [[435, 'M', 212.25], [55, 'F', 22.3], [455, 'I', 122.69]];
+    let feed = [["Móvil", 250, "Enero"], ["Tablet", 350, "Enero"], ["PS4", 400, "Marzo"], ["Tablet", 350, "Marzo"], ["Anti-Virus", 130, "Enero"], ["Auriculares", 25, "Febrero"], ["PS4", 400, "Enero"], ["PC", 600, "Febrero"], ["Anti-Virus", 30, "Febrero"], ["PS4", 400, "Febrero"]];
+    let labels2 = [{
+      "tag": "Caracteristica",
+      "type": "categoric",
+      "serie": "true"
+    }, {
+      "tag": "American Express",
+      "type": "numeric",
+      "serie": "false"
+    }, {
+      "tag": "MasterCard",
+      "type": "numeric",
+      "serie": "false"
+    }, {
+      "tag": "PayPal",
+      "type": "numeric",
+      "serie": "false"
+    }, {
+      "tag": "Visa",
+      "type": "numeric",
+      "serie": "false"
+    }];
+    let feed2 = [["Credibilidad", 60, 70, 80, 90], ["Transparencia", 90, 90, 75, 89], ["Soporte", 67, 78, 85, 83], ["Regalias", 32, 48, 55, 13]];
     return React.createElement("div", null, React.createElement(GenericTable, {
       title: title,
-      labels: myLabels,
-      feed: myData
-    }), React.createElement(GenericTable, {
-      title: "Custom Table 2",
-      labels: myLabels,
-      feed: myData
-    }), React.createElement(GenericTable, {
-      title: "Custom Table e",
-      labels: myLabels,
-      feed: myData
-    }));
+      labels: labels,
+      feed: feed
+    }), React.createElement(SurveyHis, {
+      title: 'Simple Bar Chart',
+      labels: labels2,
+      feed: feed2
+    }, " "));
   }
 
   render() {
