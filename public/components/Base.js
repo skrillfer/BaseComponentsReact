@@ -1,22 +1,9 @@
 class Base extends React.Component {
   constructor(props) {
     super(props); //since we are extending class Table so we have to use super in order to override Component class constructor
-
-    this.state = {
-      //state is by default an object
-      students: []
-    };
   }
 
-  componentWillMount() {
-    /*fetch('http://taller-angular.carlosazaustre.es/empleados')
-      .then((response) => {
-        return response.json()
-      })
-      .then((empleados) => {
-        this.setState({ empleados: empleados })
-      })*/
-  }
+  componentWillMount() {}
 
   creatingReport() {
     let title = "Ventas del Anio 2019";
@@ -66,19 +53,12 @@ class Base extends React.Component {
       "serie": "false"
     }];
     let feed3 = [[5250, "Enero"], [4350, "Febrero"], [3400, "Marzo"], [1350, "Abril"], [3130, "Mayo"], [7899, "Junio"], [5600, "Julio"], [6600, "Agosto"], [4210, "Septiembre"], [5600, "Octubre"], [1600, "Noviembre"], [28600, "Diciembre"]];
-    return React.createElement("div", null, React.createElement(GenericTable, {
-      title: title,
-      labels: labels,
-      feed: feed
-    }), React.createElement(SurveyHis, {
-      title: 'Simple Bar Chart',
+    return React.createElement("div", null, React.createElement(SurveyTable, {
+      pageSize: 4,
+      title: 'Evaluacion de Servicio',
       labels: labels2,
       feed: feed2
-    }, " "), React.createElement(SurveyPie, {
-      title: 'Simple Pie Chart',
-      labels: labels3,
-      feed: feed3
-    }, " "));
+    }));
   }
 
   render() {

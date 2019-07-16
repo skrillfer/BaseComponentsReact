@@ -24,7 +24,7 @@ class SurveyPie extends ComponentGeneric {
     render() {
         return (
            
-              <div className="card" style={{"maxWidth":"40rem"}}>
+              <div className="card" style={{"display":"display: inline-block"}}>
                  <h4 className="card-title">{this.state.title}</h4>
   
                  <div className="card-header">

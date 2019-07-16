@@ -1,29 +1,27 @@
 
 
-class GenericTable extends ComponentGeneric {
+class SurveyTable extends ComponentGeneric {
     constructor(props) {
       super(props);
+      
     }
   
    componentDidMount()
    {
       
+      var self= this;
       $(document).ready(function() {
-         $('#students').DataTable();
-     } );
+         $('#table_'+self.state.key).DataTable({
+            "pageLength": self.props.pageSize,
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bInfo": false,
+            "bAutoWidth": false 
+         });
+     });
    }
 
-   sortByCol(colIndex){
-      var feedSort=this.state.feed.sort(
-         (a, b) =>{
-            a = a[colIndex];
-            b = b[colIndex];
-            return isNaN(a-b) ? (a === b) ? 0 : (a < b) ? -1 : 1 : a-b  ;
-         }
-      );
-      
-      this.setState({feed:feedSort});
-   }
    
    renderTableHeaders(){
         const { labels} = this.state;
@@ -57,14 +55,14 @@ class GenericTable extends ComponentGeneric {
     render() {
         return (
            
-              <div className="card" style={{"maxWidth":"50rem"}}>
+              <div className="card" style={{"display":"display: inline-block"}}>
                  <h4 className="card-title">{this.state.title}</h4>
   
                  <div className="card-header">
                     
                  </div>
                  <div className="card-body">
-                    <table className="table table-condensed" id='students'>
+                    <table className="table table-condensed" id={'table_'+this.state.key}>
                        <thead>
                             {this.renderTableHeaders()}
                        </thead>

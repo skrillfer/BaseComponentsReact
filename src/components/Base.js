@@ -2,20 +2,8 @@
 class Base extends React.Component {
     constructor(props) {
         super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
-        this.state = { //state is by default an object
-           students: [
-              
-           ]
-        }
      }
     componentWillMount() {
-        /*fetch('http://taller-angular.carlosazaustre.es/empleados')
-          .then((response) => {
-            return response.json()
-          })
-          .then((empleados) => {
-            this.setState({ empleados: empleados })
-          })*/
     }
 
     
@@ -74,9 +62,7 @@ class Base extends React.Component {
         ]
 
         return <div>
-            <GenericTable title={title} labels={labels} feed={feed}></GenericTable>  
-            <SurveyHis   title={'Simple Bar Chart'} labels={labels2} feed={feed2} > </SurveyHis>
-            <SurveyPie   title={'Simple Pie Chart'} labels={labels3} feed={feed3} > </SurveyPie>
+                <SurveyTable  pageSize={4} title={'Evaluacion de Servicio'} labels={labels2} feed={feed2}></SurveyTable>
             </div>
     }
     render()

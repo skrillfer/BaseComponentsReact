@@ -121,7 +121,6 @@ class ComponentGeneric extends React.Component {
       }
     }
 
-    console.log(dataSET);
     return dataSET;
   }
 

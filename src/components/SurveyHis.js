@@ -25,14 +25,13 @@ class SurveyHis extends ComponentGeneric {
     render() {
         return (
            
-              <div className="card" style={{"maxWidth":"40rem"}}>
+              <div className="card" style={{"display":"display: inline-block"}}>
                  <h4 className="card-title">{this.state.title}</h4>
   
                  <div className="card-header">
                  </div>
                  <div className="card-body">
-                  <canvas id={"bar_"+this.state.key} width="800" height="450"></canvas>
-
+                    <canvas id={"bar_"+this.state.key} width="800" height="450"></canvas>
                  </div> 
                  
               </div>  

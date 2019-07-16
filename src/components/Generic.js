@@ -8,7 +8,6 @@ class ComponentGeneric extends React.Component {
                         key   :   this.makeId(3)
                    };
       this.uniqueArrayColor = [];
-      
     }
     
     makeId(length) {
@@ -139,7 +138,7 @@ class ComponentGeneric extends React.Component {
           }
         }
       }
-      console.log(dataSET);
+      
       return dataSET;
     }
 
