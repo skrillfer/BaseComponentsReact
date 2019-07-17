@@ -4,6 +4,7 @@ class SurveyTable extends ComponentGeneric {
   }
 
   componentDidMount() {
+    console.log("renderizada tabla");
     var self = this;
     $(document).ready(function () {
       $('#table_' + self.state.key).DataTable({

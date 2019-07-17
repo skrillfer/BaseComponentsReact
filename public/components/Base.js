@@ -1,9 +1,20 @@
 class Base extends React.Component {
   constructor(props) {
     super(props); //since we are extending class Table so we have to use super in order to override Component class constructor
+
+    this.state = {
+      dataSource: []
+    };
+    this.URL = 'http://209.105.248.173/api.php?report=default';
   }
 
-  componentWillMount() {}
+  componentDidMount() {
+    fetch(this.URL).then(response => {
+      return response.text();
+    }).then(results => {
+      console.log(results);
+    });
+  }
 
   creatingReport() {
     let title = "Ventas del Anio 2019";
