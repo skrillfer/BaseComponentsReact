@@ -11,21 +11,6 @@ class SurveyGroup extends GenericGroup {
     injectChart(chartName,pageSize)
     {
         const {labels,feed} = this.state;
-        
-        /*let labels2= [ {"tag":"Caracteristica","type":"categoric","serie":"true"},
-        {"tag":"American Express","type":"numeric","serie":"false"},
-        {"tag":"MasterCard","type":"numeric","serie":"false"},
-        {"tag":"PayPal","type":"numeric","serie":"false"},
-        {"tag":"Visa","type":"numeric","serie":"false"},
-      ]
-
-      let feed2 = [
-          ["Credibilidad",60,70,80,90],
-          ["Transparencia",90,90,75,89],
-          ["Soporte",67,78,85,83],
-          ["Regalias",32,48,55,13],
-      ]*/
-
         switch(chartName)
         {
             case "SurveyTable":
