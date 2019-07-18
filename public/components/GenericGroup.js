@@ -5,7 +5,8 @@ class GenericGroup extends React.Component {
       labels: [],
       feed: []
     };
-    this.URL = 'http://209.105.248.173/api.php?report=maxoverspeed&stime=2019-07-01+18%3A20&etime=2019-07-16+18%3A20';
+    this.URL = 'http://209.105.248.173/api.php?report=maxoverspeed&stime=2019-07-01+18%3A20&etime=2019-07-16+18%3A20'; //
+    //http://209.105.248.173/api.php?report=maxoverspeed&stime=2019-07-01+18%3A20&etime=2019-07-16+18%3A20
   }
 
   consumeAPI(callback) {
@@ -18,7 +19,6 @@ class GenericGroup extends React.Component {
           labels: data.labels,
           feed: data.feed
         });
-        callback();
       } catch (error) {
         this.setState({
           labels: [],
@@ -26,6 +26,8 @@ class GenericGroup extends React.Component {
         });
         console.log("Error al parsear a json:" + error);
       }
+
+      callback();
     });
   }
 
