@@ -14,7 +14,8 @@ class SurveyTable extends ComponentGeneric {
           "bLengthChange": false,
           "bFilter": true,
           "bInfo": false,
-          "bAutoWidth": false
+          "bAutoWidth": false,
+          "scrollX": true
         });
       });
     } catch (error) {}
@@ -52,11 +53,12 @@ class SurveyTable extends ComponentGeneric {
       style: {
         "display": "display: inline-block"
       }
-    }, React.createElement("h4", {
-      className: "card-title"
-    }, this.state.title), React.createElement("div", {
+    }, React.createElement("div", {
       className: "card-header"
-    }), React.createElement("div", {
+    }, React.createElement("button", {
+      type: "button",
+      className: "btn btn-link"
+    }, React.createElement("small", null, "Descargar CSV"))), React.createElement("div", {
       className: "card-body"
     }, React.createElement("table", {
       className: "table table-condensed",

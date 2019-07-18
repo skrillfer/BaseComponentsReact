@@ -1,7 +1,6 @@
 <html>
     <head>
             <!--Date Picker -->
-         
             <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
             <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
 
@@ -21,6 +20,10 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+            <!--Data Table-->
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/> 
+            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
             <!--Generics-->
             <script src="components/Generic.js" ></script>
             <script src="components/GenericGroup.js" ></script>
@@ -29,23 +32,18 @@
             <script src="components/SurveyPie.js" ></script>
             <script src="components/SurveyCalendar.js" ></script>
 
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
- 
-            <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
             
 
     </head>
     <body>
         <h1>React JS Components</h1>
-        <div id="root"></div>
+        <div id="container"></div>
         <script>
-            var COSNT_COMPO =[
-                                {"SurveyTable":{ "pageSize":10 }},
-                                
-                            ];
+            var COSNT_COMPO =[{"SurveyTable":{ "pageSize":10 }}];
             var CONST_COLUMNS= 12;
-
+            var RENDER_IN = 'container';
         </script>
+        
         <script  src="components/SurveyGroup.js" ></script>
         <div id="myGrid" style="height: 600px;width:500px;" class="ag-theme-balham"></div>
 

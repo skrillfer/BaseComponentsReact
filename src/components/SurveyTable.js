@@ -17,7 +17,8 @@ class SurveyTable extends ComponentGeneric {
                "bLengthChange": false,
                "bFilter": true,
                "bInfo": false,
-               "bAutoWidth": false 
+               "bAutoWidth": false,
+               "scrollX": true
             });
         });   
       } catch (error) {
@@ -42,7 +43,6 @@ class SurveyTable extends ComponentGeneric {
 
     renderTableData() {
         const {feed} = this.state;  
-        
         return feed.map((dimension,ky) => {
            return <tr key={ky}>
                  {
@@ -61,10 +61,8 @@ class SurveyTable extends ComponentGeneric {
         return (
            
               <div className="card" style={{"display":"display: inline-block"}}>
-                 <h4 className="card-title">{this.state.title}</h4>
-  
                  <div className="card-header">
-                    
+                 <button type="button" className="btn btn-link"><small>Descargar CSV</small></button>
                  </div>
                  <div className="card-body">
                     <table className="table table-condensed" id={'table_'+this.state.key}>
