@@ -51,7 +51,19 @@ class SurveyGroup extends GenericGroup {
   }
 
   render() {
-    return React.createElement("div", null, this.state.children);
+    return React.createElement("div", {
+      className: "container"
+    }, React.createElement("div", {
+      className: "row"
+    }, React.createElement("div", {
+      className: "col-6"
+    }, React.createElement(SurveyCalendar, {
+      title: 'FechaInicial'
+    })), React.createElement("div", {
+      className: "col-6"
+    }, React.createElement(SurveyCalendar, {
+      title: 'FechaFinal'
+    }))), this.state.children);
   }
 
 }

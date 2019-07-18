@@ -43,9 +43,19 @@ class SurveyGroup extends GenericGroup {
     
     render()
     {
-        return <div>
-            {this.state.children}
-        </div>
+        return <div className="container">
+                <div className="row">
+                    <div className="col-6">
+                        <SurveyCalendar title={'FechaInicial'}></SurveyCalendar>
+                    </div>
+                    <div className="col-6">
+                        <SurveyCalendar title={'FechaFinal'}></SurveyCalendar>
+                    </div>
+                </div>
+                <hr/>
+                {this.state.children}
+            
+            </div>
     }
 }
 

@@ -18,7 +18,7 @@ class ComponentGeneric extends React.Component {
          result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
       return result;
-   }
+    }
    
     setUniqueArrayColor(size)
     {
