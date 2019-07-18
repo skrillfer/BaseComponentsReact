@@ -10,8 +10,7 @@ class SurveyTable extends ComponentGeneric {
    {        
       const {feed,labels} = this.state;  
       var self= this;
-      if(feed.length>0 && labels.length>0)
-      {
+      if(feed.length>0 && labels.length>0){
          $(document).ready(function() {
             $('#table_'+self.state.key).DataTable({
                "pageLength": self.props.pageSize,
@@ -23,8 +22,10 @@ class SurveyTable extends ComponentGeneric {
                "scrollX": true,
             });
          });  
-         console.log('feed empty'); 
-      } 
+         
+      } else{
+         console.log('feed empty');
+      }
    }
 
    generateCSVFile()

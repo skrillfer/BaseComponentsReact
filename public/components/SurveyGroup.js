@@ -37,8 +37,37 @@ class SurveyGroup extends GenericGroup {
   }
 
   onChangeDatePicker(args) {
+    const {
+      children
+    } = this.state;
+
     try {
       this.arrayDatePicker[args.element.id] = args.value;
+
+      if (children.length > 0) {
+        var keysDatePicker = Object.keys(this.arrayDatePicker);
+        var iniDatePicker = keysDatePicker.find(element => {
+          return element.includes("ini");
+        });
+        var finDatePicker = keysDatePicker.find(element => {
+          return element.includes("fin");
+        });
+        var iniDate = this.arrayDatePicker[iniDatePicker];
+        var finDate = this.arrayDatePicker[finDatePicker];
+        iniDate = new Date(iniDate);
+        finDate = new Date(finDate);
+        console.log(iniDate);
+        console.log(finDate);
+
+        if (!isNaN(iniDate) && !isNaN(finDate)) {
+          console.log('cnsumiendo');
+          this.consumeAPI({
+            inidate: iniDate.toISOString(),
+            findate: finDate.toISOString()
+          }, function () {//self.createReport();
+          });
+        }
+      }
     } catch (error) {
       console.log('Error in event onChangeDatePicker' + error);
     }
@@ -46,7 +75,10 @@ class SurveyGroup extends GenericGroup {
 
   componentDidMount() {
     var self = this;
-    this.consumeAPI(function () {
+    this.consumeAPI({
+      inidate: "2019-07-01+18%3A20",
+      findate: "2019-07-16+18%3A20"
+    }, function () {
       self.createReport();
     });
   }
@@ -70,13 +102,15 @@ class SurveyGroup extends GenericGroup {
     }, React.createElement("div", {
       className: "col-md-2"
     }, React.createElement(SurveyCalendar, {
+      startAt: 'ini',
       handler_onChange: this.onChangeDatePicker,
-      title: 'Fecha Inicial'
+      placeHolder: 'Fecha Inicial'
     })), React.createElement("div", {
       className: "col-md-2 offset-md-8"
     }, React.createElement(SurveyCalendar, {
+      startAt: 'fin',
       handler_onChange: this.onChangeDatePicker,
-      title: 'Fecha Final'
+      placeHolder: 'Fecha Final'
     }))), React.createElement("hr", null), this.state.children.length == 0 ? React.createElement("div", {
       className: "text-center"
     }, React.createElement("div", {

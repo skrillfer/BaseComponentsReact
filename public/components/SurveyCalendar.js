@@ -10,7 +10,7 @@ class SurveyCalendar extends React.Component {
 
   generateId() {
     var d = new Date();
-    this.key = "calendar_" + d.getTime();
+    this.key = this.props.startAt + "_calendar_" + d.getTime();
   }
 
   handleChange(e) {
@@ -23,7 +23,7 @@ class SurveyCalendar extends React.Component {
     if (!this._isPicker) {
       let self = this;
       var datepicker = new ej.calendars.DatePicker({
-        placeholder: this.props.title,
+        placeholder: this.props.placeHolder,
         change: function (args) {
           self.handleChange(args);
         }

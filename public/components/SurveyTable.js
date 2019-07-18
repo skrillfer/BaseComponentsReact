@@ -23,6 +23,7 @@ class SurveyTable extends ComponentGeneric {
           "scrollX": true
         });
       });
+    } else {
       console.log('feed empty');
     }
   }
