@@ -1,11 +1,13 @@
 class SurveyGroup extends GenericGroup {
   constructor(props) {
     super(props);
+    this.arrayDatePicker = [];
     this.state = {
       children: [],
       labels: [],
       feed: []
     };
+    this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
   }
 
   injectChart(chartName, pageSize) {
@@ -31,6 +33,14 @@ class SurveyGroup extends GenericGroup {
           labels: labels,
           feed: feed
         });
+    }
+  }
+
+  onChangeDatePicker(args) {
+    try {
+      this.arrayDatePicker[args.element.id] = args.value;
+    } catch (error) {
+      console.log('Error in event onChangeDatePicker' + error);
     }
   }
 
@@ -60,10 +70,12 @@ class SurveyGroup extends GenericGroup {
     }, React.createElement("div", {
       className: "col-md-2"
     }, React.createElement(SurveyCalendar, {
+      handler_onChange: this.onChangeDatePicker,
       title: 'Fecha Inicial'
     })), React.createElement("div", {
       className: "col-md-2 offset-md-8"
     }, React.createElement(SurveyCalendar, {
+      handler_onChange: this.onChangeDatePicker,
       title: 'Fecha Final'
     }))), React.createElement("hr", null), this.state.children.length == 0 ? React.createElement("div", {
       className: "text-center"

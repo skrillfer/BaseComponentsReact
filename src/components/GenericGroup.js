@@ -25,7 +25,10 @@ class GenericGroup extends React.Component {
                     });
                 callback();
             } catch (error) {
-                
+                this.setState({
+                        labels : [],
+                        feed   : []
+                });
                 console.log("Error al parsear a json:"+error);
             }
         });

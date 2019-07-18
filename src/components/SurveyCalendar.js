@@ -15,8 +15,11 @@ class SurveyCalendar extends React.Component {
 
     handleChange(e)
     {
-        console.log('hecambiado');
-        console.log(new Date(e.value));
+        if(this.props.handler_onChange){
+            console.log('hecambiado');
+            this.props.handler_onChange(e);
+        }
+        
     }
     
     componentDidMount()
