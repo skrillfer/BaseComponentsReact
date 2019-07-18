@@ -53,7 +53,8 @@ class SurveyGroup extends GenericGroup {
                     </div>
                 </div>
                 <hr/>
-                {this.state.children}
+                {this.state.children.length==0?<div>loading..</div>:this.state.children}
+                
             
             </div>
     }

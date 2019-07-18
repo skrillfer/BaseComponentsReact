@@ -13,6 +13,10 @@ class SurveyCalendar extends React.Component {
     this.key = "calendar_" + d.getTime();
   }
 
+  handleChange(e) {
+    console.log('hecambiado');
+  }
+
   componentDidMount() {
     if (!this._isPicker) {
       var datepicker = new ej.calendars.DatePicker({
@@ -21,14 +25,15 @@ class SurveyCalendar extends React.Component {
       datepicker.appendTo('#' + this.key);
       this._isPicker = true;
     }
-
-    console.log(this._isPicker);
   }
 
   render() {
     return React.createElement("input", {
       type: "text",
-      id: this.key
+      id: this.key,
+      onChange: e => {
+        this.handleChange(e);
+      }
     });
   }
 

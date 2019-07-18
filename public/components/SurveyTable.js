@@ -5,16 +5,19 @@ class SurveyTable extends ComponentGeneric {
 
   componentDidMount() {
     var self = this;
-    $(document).ready(function () {
-      $('#table_' + self.state.key).DataTable({
-        "pageLength": self.props.pageSize,
-        "bPaginate": true,
-        "bLengthChange": false,
-        "bFilter": true,
-        "bInfo": false,
-        "bAutoWidth": false
+
+    try {
+      $(document).ready(function () {
+        $('#table_' + self.state.key).DataTable({
+          "pageLength": self.props.pageSize,
+          "bPaginate": true,
+          "bLengthChange": false,
+          "bFilter": true,
+          "bInfo": false,
+          "bAutoWidth": false
+        });
       });
-    });
+    } catch (error) {}
   }
 
   renderTableHeaders() {

@@ -63,7 +63,7 @@ class SurveyGroup extends GenericGroup {
       className: "col-6"
     }, React.createElement(SurveyCalendar, {
       title: 'FechaFinal'
-    }))), this.state.children);
+    }))), React.createElement("hr", null), this.state.children.length == 0 ? React.createElement("div", null, "loading..") : this.state.children);
   }
 
 }
