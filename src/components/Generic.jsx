@@ -1,4 +1,6 @@
-class ComponentGeneric extends React.Component {
+import React, { Component } from 'react';
+
+class ComponentGeneric extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -198,3 +200,4 @@ class ComponentGeneric extends React.Component {
       return {'series':seriesLabels,'index':seriesIndex}
     }
 }
+export default ComponentGeneric;

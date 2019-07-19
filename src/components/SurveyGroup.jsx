@@ -1,3 +1,10 @@
+import React, { Component } from 'react';
+
+import GenericGroup from "./GenericGroup.jsx";
+import SurveyTable  from "./SurveyTable.jsx";
+import SurveyHis from "./SurveyHis.jsx";
+import SurveyCalendar from "./SurveyCalendar.jsx";
+
 class SurveyGroup extends GenericGroup {
     constructor(props) {
       super(props);
@@ -39,13 +46,13 @@ class SurveyGroup extends GenericGroup {
                 
                 iniDate = new Date(iniDate);
                 finDate = new Date(finDate);
-                console.log(iniDate);
-                console.log(finDate);
                 if(!isNaN(iniDate) && !isNaN(finDate))
                 {
-                    console.log('cnsumiendo');
+                    this.setState({children:[]});
+                    console.log('consumiendo');
+                    let self = this;
                     this.consumeAPI({inidate:iniDate.toISOString(),findate:finDate.toISOString()},function(){
-                        //self.createReport();
+                        self.createReport();
                     });
                 }
                      
@@ -58,12 +65,11 @@ class SurveyGroup extends GenericGroup {
     componentDidMount()
     {
         var self=this;
-        
-        
         this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
             self.createReport();
         });
     }
+    
     createReport()
     {
         var chartArray=[];
@@ -79,7 +85,7 @@ class SurveyGroup extends GenericGroup {
     
     render()
     {
-        return <div className="container">
+        return <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-2">
                         <SurveyCalendar startAt={'ini'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Inicial'}></SurveyCalendar>
@@ -101,8 +107,5 @@ class SurveyGroup extends GenericGroup {
             </div>
     }
 }
+export default SurveyGroup;
 
-ReactDOM.render(
-    <SurveyGroup nColumns = {this.CONST_COLUMNS} nComponents = {this.COSNT_COMPO} />,
-    document.getElementById(this.RENDER_IN)
-);

@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+
+import ComponentGeneric from "./Generic.jsx";
 
 
 class SurveyTable extends ComponentGeneric {
@@ -131,3 +134,4 @@ class SurveyTable extends ComponentGeneric {
         )
      }
 }
+export default SurveyTable;

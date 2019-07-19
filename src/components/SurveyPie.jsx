@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+import ComponentGeneric from "./Generic.jsx";
+
 class SurveyPie extends ComponentGeneric {
     constructor(props) {
       super(props);
@@ -6,6 +9,7 @@ class SurveyPie extends ComponentGeneric {
    componentDidMount()
    {
       var dataSET=this.validateDataForChart('pie');
+      
       new Chart(document.getElementById("pie_"+this.state.key), {
         type: 'pie',
         data: dataSET,
@@ -38,3 +42,5 @@ class SurveyPie extends ComponentGeneric {
         )
      }
 }
+
+export default SurveyPie;

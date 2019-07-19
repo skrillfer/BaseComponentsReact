@@ -1,4 +1,7 @@
-class SurveyCalendar extends React.Component {
+import React, { Component } from 'react';
+
+
+class SurveyCalendar extends Component {
     constructor(props) {
         super(props); 
         //title indica el nombre que aparecera en el picker
@@ -41,3 +44,5 @@ class SurveyCalendar extends React.Component {
         return <input type="text" id={this.key} />
     }
 }
+
+export default SurveyCalendar;

@@ -1,3 +1,7 @@
+import React, { Component } from 'react';
+
+import ComponentGeneric from "./Generic.jsx";
+
 class SurveyHis extends ComponentGeneric {
     constructor(props) {
       super(props);
@@ -38,3 +42,5 @@ class SurveyHis extends ComponentGeneric {
         )
      }
 }
+
+export default SurveyHis;
