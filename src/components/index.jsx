@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import SurveyGroup from './SurveyGroup.jsx';
+import Report from "./Report.jsx";
 
 var injectUIComponents = function(id,CONST_COLUMNS,COSNT_COMPO) {
     ReactDOM.render(
@@ -9,4 +10,16 @@ var injectUIComponents = function(id,CONST_COLUMNS,COSNT_COMPO) {
     );    
 }
 
-export default {injectUIComponents:injectUIComponents};
+var injectUIReport = function(id){
+    ReactDOM.render(
+        <Report />,
+        document.getElementById(id)
+    );
+}
+
+export {
+    injectUIComponents,
+    injectUIReport,
+  }
+//export default {injectUIComponents:injectUIComponents};
+//export default {injectUIReport:injectUIReport};
