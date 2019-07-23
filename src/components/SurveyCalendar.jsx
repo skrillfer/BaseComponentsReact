@@ -32,7 +32,8 @@ class SurveyCalendar extends Component {
               placeholder: this.props.placeHolder,
               change: function (args) {
                 self.handleChange(args);
-              }
+              },
+              language: "it"
             });
           datepicker.appendTo('#'+this.key);
           this._isPicker = true;
@@ -41,7 +42,7 @@ class SurveyCalendar extends Component {
 
     render()
     {
-        return <input type="text" id={this.key} />
+        return <input type="date" id={this.key} />
     }
 }
 
