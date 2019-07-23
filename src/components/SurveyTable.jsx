@@ -20,7 +20,7 @@ class SurveyTable extends ComponentGeneric {
                "bPaginate": true,
                "bLengthChange": false,
                "bFilter": true,
-               "bInfo": true,
+               "bInfo": false,
                "bAutoWidth": false,
                "scrollX": true,
             });
@@ -114,7 +114,7 @@ class SurveyTable extends ComponentGeneric {
 
     render() {
         return (
-           
+               
               <div className="card" style={{"display":"display: inline-block"}}>
                  <div className="card-header">
                  <button type="button" className="btn btn-link" onClick={this.generateCSVFile}><small>Descargar CSV</small></button>

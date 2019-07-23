@@ -15,8 +15,9 @@ class GenericGroup extends Component {
     
     consumeAPI(args,callback)
     {
-        console.log(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate);
-        fetch(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate)
+        //console.log(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate);
+        //fetch(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate)
+        fetch("http://209.105.248.173/api.php?report=default")
         .then((response) => {
             return response.text();
         })

@@ -20,6 +20,7 @@ class SurveyGroup extends GenericGroup {
     
     injectChart(chartName,pageSize)
     {
+
         const {labels,feed} = this.state;
         switch(chartName)
         {
@@ -70,28 +71,75 @@ class SurveyGroup extends GenericGroup {
         });
     }
     
+
+    /*
+    <div class="row">
+        <div class="col-auto mr-auto">.col-auto .mr-auto</div>
+        <div class="col-auto">.col-auto</div>
+    </div>
+    */
     createReport()
     {
+        const {nColumns,nComponents}= this.props;
         var chartArray=[];
-        this.props.nComponents.map(
-            chart=>{
-                let objName =Object.keys(chart)[0];
-                chartArray.push(this.injectChart(objName,chart[objName].pageSize));
-            }
-        );
+        var count=0;
+        if(nColumns!=null && nColumns.length>0){
+            nColumns.map(
+                nElements=>
+                {
+                    var containerElements = [];
+                    for (let index = 0; index < nElements; index++) {
+                        if(count>=nComponents.length){continue;}
+                        let chart = nComponents[count];
+                        let objName = Object.keys(chart)[0]
+                        containerElements.push(
+                            <div className="col-md-auto">
+                                <h1 class="display-4">{chart[objName].title}</h1>
+                                {this.injectChart(objName,chart[objName].pageSize)}
+                            </div>
+                        );
+                        count++;
+                    }
+                    chartArray.push(<div className="row justify-content-around mb-5">
+                                        {containerElements}
+                                    </div>);
+                }
+            );
+        }else
+        {
+            var containerElements = [];
+            nComponents.map(
+                chart=>{
+                    let objName = Object.keys(chart)[0];
+                    containerElements.push(
+                        <div className="col-md-auto">
+                            <h1 class="display-4">{chart[objName].title}</h1>
+                            {this.injectChart(objName,chart[objName].pageSize)}
+                        </div>
+                    );
+                }
+            );
+            chartArray.push(<div className="row justify-content-around mb-5">
+                                        {containerElements}
+                                    </div>);
+        }
         this.setState({children:chartArray});    
     }
  
+
     
     render()
     {
         return <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-2 offset-md-3">
                         <SurveyCalendar startAt={'ini'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Inicial'}></SurveyCalendar>
                     </div>
-                    <div className="col-md-2 offset-md-8">
+                    <div className="col-md-2">
                         <SurveyCalendar startAt={'fin'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Final'}></SurveyCalendar>
+                    </div>
+                    <div className="col-md-2">
+                        <button type="button" class="btn btn-dark">Buscar</button>
                     </div>
                 </div>
                 <hr/>
