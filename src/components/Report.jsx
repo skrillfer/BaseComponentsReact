@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 
-import Tabs from './SurveyTabs.jsx';
+import {Tabs, Tab} from 'react-bootstrap-tabs';
+
 
 import SurveyGroup from './SurveyGroup.jsx';
 
-import styles from './styles.css';
 
 class Report extends Component {
     render(){
         return (
-            <div>
-              <Tabs>
-              <div label="Gator">
-                See ya later, <em>Alligator</em>!
-              </div>
-              <div label="Croc">
-                After 'while, <em>Crocodile</em>!
-              </div>
-              <div label="Sarcosuchus">
-                <SurveyGroup nColumns =  {[3,1]} nComponents =  {[{"SurveyTable":{ "title":"Top Vehiculos","pageSize":10 }},{"SurveyTable":{"title":"Alertas", "pageSize":10 }},{"SurveyTable":{ "pageSize":10 }},{"SurveyHis":{"title":"Ventas vs Costos"}}]} />
-              </div>
-            </Tabs>
-            </div>
+            <React.Fragment>
+              <Tabs onSelect={(index, label) => console.log(label + ' selected')} unmountOnExit={true}>
+                <Tab label="Resumen">Tab 1 content</Tab>
+                <Tab label="Por Grupo">Tab 2 content</Tab>
+                <Tab label="Por Vehiculo" >
+                    <SurveyGroup nColumns =  {[3,1]} nComponents =  {[{"SurveyTable":{ "title":"Top Vehiculos","pageSize":10 }},{"SurveyTable":{"title":"Alertas", "pageSize":10 }},{"SurveyTable":{ "pageSize":10 }},{"SurveyHis":{"title":"Ventas vs Costos"}}]} />
+                </Tab>
+              </Tabs>
+            </React.Fragment>
           );
     }
 }
