@@ -67,7 +67,9 @@ class SurveyGroup extends GenericGroup {
     {
         var self=this;
         this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
+            console.log('Consume API');
             self.createReport();
+            console.log('After Consume API');
         });
     }
     

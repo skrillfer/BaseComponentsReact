@@ -20,6 +20,6 @@ var injectUIReport = function(id){
 export {
     injectUIComponents,
     injectUIReport,
-  }
+}
 //export default {injectUIComponents:injectUIComponents};
 //export default {injectUIReport:injectUIReport};

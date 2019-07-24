@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 import Tabs from './SurveyTabs.jsx';
 
+import SurveyGroup from './SurveyGroup.jsx';
+
 import styles from './styles.css';
 
 class Report extends Component {
     render(){
         return (
             <div>
-              <h1>Tabs Demo</h1>
-             <Tabs>
+              <Tabs>
               <div label="Gator">
                 See ya later, <em>Alligator</em>!
               </div>
@@ -17,7 +18,7 @@ class Report extends Component {
                 After 'while, <em>Crocodile</em>!
               </div>
               <div label="Sarcosuchus">
-                Nothing to see here, this tab is <em>extinct</em>!
+                <SurveyGroup nColumns =  {[3,1]} nComponents =  {[{"SurveyTable":{ "title":"Top Vehiculos","pageSize":10 }},{"SurveyTable":{"title":"Alertas", "pageSize":10 }},{"SurveyTable":{ "pageSize":10 }},{"SurveyHis":{"title":"Ventas vs Costos"}}]} />
               </div>
             </Tabs>
             </div>
