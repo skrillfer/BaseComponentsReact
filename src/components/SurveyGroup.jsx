@@ -71,13 +71,6 @@ class SurveyGroup extends GenericGroup {
         });
     }
     
-
-    /*
-    <div class="row">
-        <div class="col-auto mr-auto">.col-auto .mr-auto</div>
-        <div class="col-auto">.col-auto</div>
-    </div>
-    */
     createReport()
     {
         const {nColumns,nComponents}= this.props;

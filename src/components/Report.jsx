@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import Tabs from './SurveyTabs.jsx';
-//import './styles.css';
+
+import styles from './styles.css';
+
 class Report extends Component {
     render(){
         return (
