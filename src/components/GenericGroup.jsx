@@ -22,7 +22,6 @@ class GenericGroup extends Component {
             return response.text();
         })
         .then((results) => {
-            console.log(results);
             try {
                 var data=JSON.parse(results);
                 

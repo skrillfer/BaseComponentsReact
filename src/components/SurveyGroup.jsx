@@ -53,16 +53,18 @@ class SurveyGroup extends GenericGroup {
                     console.log('consumiendo');
                     let self = this;
                     this.consumeAPI({inidate:iniDate.toISOString(),findate:finDate.toISOString()},function(){
-                        self.createReport();
+                        
+                        //self.createReport();
                     });
-                }
-                     
+                }  
             }
         } catch (error) {
             console.log('Error in event onChangeDatePicker'+error);
         }
     }   
-
+    componentWillUnmount(){
+        console.log('Component Will unmount');
+    }
     componentDidMount()
     {
         var self=this;

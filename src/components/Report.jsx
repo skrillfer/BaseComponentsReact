@@ -7,10 +7,11 @@ import SurveyGroup from './SurveyGroup.jsx';
 
 
 class Report extends Component {
+    
     render(){
         return (
             <React.Fragment>
-              <Tabs onSelect={(index, label) => console.log(label + ' selected')} unmountOnExit={true}>
+              <Tabs onSelect={(index, label) => console.log(label + ' selected')} unmountOnExit>
                 <Tab label="Resumen">Tab 1 content</Tab>
                 <Tab label="Por Grupo">Tab 2 content</Tab>
                 <Tab label="Por Vehiculo" >
