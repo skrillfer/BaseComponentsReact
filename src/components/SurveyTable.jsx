@@ -120,7 +120,7 @@ class SurveyTable extends ComponentGeneric {
                  <button type="button" className="btn btn-link" onClick={this.generateCSVFile}><small>Descargar CSV</small></button>
                  </div>
                  <div className="card-body">
-                    <table className="table table-condensed" id={'table_'+this.state.key}>
+                    <table class="display" style={{"width":"100%"}} id={'table_'+this.state.key}>
                        <thead>
                             {this.renderTableHeaders()}
                        </thead>

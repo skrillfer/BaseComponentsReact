@@ -89,7 +89,7 @@ class SurveyGroup extends GenericGroup {
                         let chart = nComponents[count];
                         let objName = Object.keys(chart)[0]
                         containerElements.push(
-                            <div className="col-md-auto">
+                            <div className="col">
                                 <h1 class="display-4">{chart[objName].title}</h1>
                                 {this.injectChart(objName,chart[objName].pageSize)}
                             </div>
@@ -108,7 +108,7 @@ class SurveyGroup extends GenericGroup {
                 chart=>{
                     let objName = Object.keys(chart)[0];
                     containerElements.push(
-                        <div className="col-md-auto">
+                        <div className="col">
                             <h1 class="display-4">{chart[objName].title}</h1>
                             {this.injectChart(objName,chart[objName].pageSize)}
                         </div>
