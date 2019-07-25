@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ComponentGeneric from "./Generic.jsx";
 
+import style  from './style.css';
 
 class SurveyTable extends ComponentGeneric {
     constructor(props) {
@@ -23,6 +24,10 @@ class SurveyTable extends ComponentGeneric {
                "bInfo": false,
                "bAutoWidth": false,
                "scrollX": true,
+                dom: 'Bfrtip',
+                  buttons: [
+                        'columnsToggle'
+                  ]
             });
          });  
          
@@ -120,7 +125,7 @@ class SurveyTable extends ComponentGeneric {
                  <button type="button" className="btn btn-link" onClick={this.generateCSVFile}><small>Descargar CSV</small></button>
                  </div>
                  <div className="card-body">
-                    <table class="display" style={{"width":"100%"}} id={'table_'+this.state.key}>
+                    <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
                        <thead>
                             {this.renderTableHeaders()}
                        </thead>
