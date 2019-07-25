@@ -1,19 +1,60 @@
 
-.dt-button.buttons-columnVisibility{
-    display:inline-block;
+.dt-button.buttons-columnVisibility
+{
+  /*border-radius:1px;  
+  background-color: slategrey;*/
+  /*
+  color: #494949 ;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ffffff;
+  padding: 20px;
+  border: 2px solid #494949;
+  display: inline-block;
+  transition: all 0.4s ease 0s;*/
+  display:inline-block;
+  /*padding:0.3em 1.2em;
+  margin:0 0.1em 0.1em 0;*/
+  border:0.05em solid black;
+  border-radius:1px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  /*text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);*/
+  text-align:center;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.dt-button.buttons-columnVisibility.focus,
+.dt-button.buttons-columnVisibility.active{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin:0 0.1em 0.1em 0;
+  border:0.1em solid rgba(255,255,255,0);
+  border-radius:1px;
+  box-sizing: border-box;
+  background-color: green;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align:center;
+  transition: all 0.2s;
+  /*display:inline-block;
+  color: #ffffff ;
+  background: green;
+  border-color: green ;
+  border-radius:1px;
+  height: 10px;
+  text-align:center;
+  transition: all 0.4s ease 0s;*/
+    /*display:inline-block;
     padding:0.3em 1.2em;
     margin:0 0.1em 0.1em 0;
-    border:0.16em solid rgba(255,255,255,0);
-    border-radius:2em;
+    border:0.1em solid rgba(255,255,255,0);
+    border-radius:1px;
     box-sizing: border-box;
-    text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
-    
+    background-color: seagreen;
     text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
     text-align:center;
-    transition: all 0.2s;
-  }
+    transition: all 0.2s;*/
+}
 
 .dt-button.buttons-columnVisibility span { font-size: 10; color: black;     font-family:'Courier New','Courier','monospace';}
+.dt-button.buttons-columnVisibility.focus span,.dt-button.buttons-columnVisibility.active span { font-size: 10; color: black;     font-family:'Courier New','Courier','monospace';}
