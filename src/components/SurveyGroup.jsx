@@ -127,7 +127,7 @@ class SurveyGroup extends GenericGroup {
     
     render()
     {
-        return <div className="container-fluid">
+        return <React.Fragment>
                 <div className="row">
                     <div className="col-md-2 offset-md-3">
                         <SurveyCalendar startAt={'ini'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Inicial'}></SurveyCalendar>
@@ -149,7 +149,7 @@ class SurveyGroup extends GenericGroup {
                 :this.state.children}
 
 
-            </div>
+            </React.Fragment>
     }
 }
 export default SurveyGroup;
