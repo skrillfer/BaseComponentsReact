@@ -49,13 +49,12 @@ class SurveyGroup extends GenericGroup {
                 finDate = new Date(finDate);
                 if(!isNaN(iniDate) && !isNaN(finDate))
                 {
-                    this.setState({children:[]});
+                    /*this.setState({children:[]});
                     console.log('consumiendo');
                     let self = this;
                     this.consumeAPI({inidate:iniDate.toISOString(),findate:finDate.toISOString()},function(){
-                        
-                        //self.createReport();
-                    });
+                        self.createReport();
+                    });*/
                 }  
             }
         } catch (error) {
