@@ -51,11 +51,10 @@ class Report extends Component {
               <div class="tab-content">
                 <div id="home" class="container tab-pane active"><br/>
                   <h3>HOME</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <p>Its a beautiful day</p>
                 </div>
                 <div id="menu1" class="container tab-pane fade"><br/>
-                  <h3>Menu 1</h3>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  {this.isActivated('2',this.state.item==2)?<SurveyGroup nColumns =  {[2,1]} nComponents =  {[{"SurveyTable":{ "title":"Tabla 1","pageSize":10 }},{"SurveyTable":{"title":"Tabla 2", "pageSize":10 }},{"SurveyTable":{ "title":"Tabla 3","pageSize":10 }}]} />:null}
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br/>
                   {this.isActivated('3',this.state.item==3)?<SurveyGroup nColumns =  {[2,1]} nComponents =  {[{"SurveyTable":{ "title":"Top Alertas","pageSize":10 }},{"SurveyTable":{"title":"Alertas", "pageSize":10 }},{"SurveyTable":{ "title":"Otra","pageSize":10 }}]} />:null}
