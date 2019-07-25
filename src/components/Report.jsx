@@ -49,14 +49,14 @@ class Report extends Component {
 
         
               <div class="tab-content">
-                <div id="home" class="container tab-pane active"><br/>
+                <div id="home" class="container-fluid tab-pane active"><br/>
                   <h3>HOME</h3>
                   <p>Its a beautiful day</p>
                 </div>
-                <div id="menu1" class="container tab-pane fade"><br/>
+                <div id="menu1" class="container-fluid tab-pane fade"><br/>
                   {this.isActivated('2',this.state.item==2)?<SurveyGroup nColumns =  {[2,1]} nComponents =  {[{"SurveyTable":{ "title":"Tabla 1","pageSize":10 }},{"SurveyTable":{"title":"Tabla 2", "pageSize":10 }},{"SurveyTable":{ "title":"Tabla 3","pageSize":10 }}]} />:null}
                 </div>
-                <div id="menu2" class="container tab-pane fade"><br/>
+                <div id="menu2" class="container-fluid tab-pane fade"><br/>
                   {this.isActivated('3',this.state.item==3)?<SurveyGroup nColumns =  {[2,1]} nComponents =  {[{"SurveyTable":{ "title":"Top Alertas","pageSize":10 }},{"SurveyTable":{"title":"Alertas", "pageSize":10 }},{"SurveyTable":{ "title":"Otra","pageSize":10 }}]} />:null}
                 </div>
               </div>
