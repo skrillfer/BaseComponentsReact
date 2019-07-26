@@ -91,12 +91,6 @@ class Report extends Component {
                 <li className="nav-item" onClick={()=>{this.customOnSelect("1")}}>
                   <a className="nav-link active" data-toggle="tab" href="#home">Resumen</a>
                 </li>
-                <li className="nav-item" onClick={()=>{this.customOnSelect("2")}}>
-                  <a className="nav-link" data-toggle="tab" href="#menu1">Por Grupo</a>
-                </li>
-                <li className="nav-item" onClick={()=>{this.customOnSelect("3")}}>
-                  <a className="nav-link" data-toggle="tab" href="#menu2">Por Vehiculo</a>
-                </li>
               </ul>
 
               <div class="tab-content">
