@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import GenericGroup from "./GenericGroup.jsx";
 import SurveyTable  from "./SurveyTable.jsx";
 import SurveyHis from "./SurveyHis.jsx";
-import SurveyCalendar from "./SurveyCalendar.jsx";
+
 
 class SurveyGroup extends GenericGroup {
     constructor(props) {
@@ -16,9 +16,32 @@ class SurveyGroup extends GenericGroup {
       }
       this._isMounted =false;
       this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
+      this.getParamsAPI = this.getParamsAPI.bind(this);
     }
     
+
+    getParamsAPI(){
+        try {
+            if(this.props.api)
+            {
+                var url_complete = this.props.api.url;
+                
+                var lparam=this.props.api.params.map(
+                    element=>{
+                        let objName = Object.keys(element)[0];
+                        return objName+"="+element[objName];
+                    }
+                );
+                return url_complete+lparam.join("&");
+            }    
+        } catch (error) {
+            console.log(error);   
+            return '';
+        }
+        
+    }
     
+
     injectChart(chartName,pageSize)
     {
 
@@ -75,12 +98,12 @@ class SurveyGroup extends GenericGroup {
             this._isMounted=false;
 
             var self=this;
-            this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
+            /*this.consumeAPI(self.getParamsAPI(),function(){
                 console.log('Consume API');
                 self.createReport();
                 self._isMounted = true;
                 console.log('Terminado');
-            });
+            });*/
             return false;
         }else
         {
@@ -95,7 +118,7 @@ class SurveyGroup extends GenericGroup {
     componentDidMount()
     {
         var self=this;
-        this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
+        this.consumeAPI(self.getParamsAPI(),function(){
             console.log('Consume API');
             console.log(self.props.keym);
             self.createReport();
@@ -107,6 +130,7 @@ class SurveyGroup extends GenericGroup {
     createReport()
     {
         const {nColumns,nComponents}= this.props;
+
         var chartArray=[];
         var count=0;
         if(nColumns!=null && nColumns.length>0){

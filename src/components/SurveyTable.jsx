@@ -23,7 +23,7 @@ class SurveyTable extends ComponentGeneric {
                "bFilter": true,
                "bInfo": false,
                "bAutoWidth": false,
-               "scrollX": true,
+               "scrollX": false,
                 dom: 'Bfrtip',
                   buttons: [
                         'columnsToggle'

@@ -17,7 +17,8 @@ class GenericGroup extends Component {
     {
         //console.log(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate);
         //fetch(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate)
-        fetch("http://209.105.248.173/api.php?report=default")
+        console.log(args);
+        fetch(args)
         .then((response) => {
             return response.text();
         })
@@ -26,7 +27,7 @@ class GenericGroup extends Component {
                 var data=JSON.parse(results);
                 
                 this.setState({ 
-                        labels:data.labels,
+                        labels:data.label,
                         feed  :data.feed
                     });
                 console.log('consumido de manera exitosa');

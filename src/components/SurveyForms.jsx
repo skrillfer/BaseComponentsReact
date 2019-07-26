@@ -60,7 +60,3 @@ class SurveyForms extends Component {
     }
 }
 export default SurveyForms;
-
-/*
-[{SurveyCalendar:{id:''}},{SurveyCalendar:{id:''}}]
-*/
