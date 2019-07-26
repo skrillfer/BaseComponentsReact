@@ -15,7 +15,6 @@ class SurveyGroup extends GenericGroup {
           feed  :[]
       }
       this._isMounted =false;
-      this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
       this.getParamsAPI = this.getParamsAPI.bind(this);
     }
     
@@ -54,77 +53,34 @@ class SurveyGroup extends GenericGroup {
                 return <SurveyHis   key={this.state.children.length} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyHis>
         }
     }
-
-    onChangeDatePicker(args){
-        const {children} = this.state;
-        console.log(args);
-        /*try {
-            this.arrayDatePicker[args.element.id]=args.value;
-            if(children.length>0){
-                
-                var keysDatePicker = Object.keys(this.arrayDatePicker);
-
-                var iniDatePicker = keysDatePicker.find(element=>{return element.includes("ini")});
-                var finDatePicker = keysDatePicker.find(element=>{return element.includes("fin")});
-
-                var iniDate = this.arrayDatePicker[iniDatePicker];
-                var finDate = this.arrayDatePicker[finDatePicker];
-                
-                iniDate = new Date(iniDate);
-                finDate = new Date(finDate);
-                if(!isNaN(iniDate) && !isNaN(finDate))
-                {
-                    this.setState({children:[]});
-                    console.log('consumiendo');
-                    let self = this;
-                    this.consumeAPI({inidate:iniDate.toISOString(),findate:finDate.toISOString()},function(){
-                        self.createReport();
-                    });
-                }  
-            }
-        } catch (error) {
-            console.log('Error in event onChangeDatePicker'+error);
-        }*/
-    }   
-
     
     shouldComponentUpdate(nextProps, nextState)
     {
-        if(!this._isMounted){ console.log('>>dale'); return true;}
-        console.log(nextProps.currentGroup+" <> "+this.props.keym);
+        if(!this._isMounted){ return true;}
         if(nextProps.currentGroup==this.props.keym)
         {
-            console.log('>>>>>>Me debo actualizar');
             this._isMounted=false;
 
             var self=this;
             this.setState({children:[]});
 
             this.consumeAPI(self.getParamsAPI(),function(){
-                console.log('Consume API');
                 self.createReport();
                 self._isMounted = true;
-                console.log('>>>Terminado');
             });
             return false;
         }else
         {
-            console.log('No debo actualizarme');
             return false;
         }
     }
     
-    componentWillUnmount(){
-        console.log('Component Will unmount');
-    }
+   
     componentDidMount()
     {
         var self=this;
         this.consumeAPI(self.getParamsAPI(),function(){
-            console.log('Consume API');
-            console.log(self.props.keym);
             self.createReport();
-            console.log('After Consume API');
             self._isMounted = true;
         });
     }

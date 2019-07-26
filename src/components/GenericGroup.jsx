@@ -9,15 +9,13 @@ class GenericGroup extends Component {
                         labels:[],
                         feed  :[]
                     }
-      this.URL ='http://209.105.248.173/api.php?';
       this.consumeAPI = this.consumeAPI.bind(this);
     }
     
     consumeAPI(args,callback)
     {
-        //console.log(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate);
-        //fetch(this.URL+"report=maxoverspeed&stime="+args.inidate+"&etime="+args.findate)
         console.log(args);
+        if (args=="") return callback;
         fetch(args)
         .then((response) => {
             return response.text();
