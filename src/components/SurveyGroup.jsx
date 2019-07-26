@@ -19,13 +19,13 @@ class SurveyGroup extends GenericGroup {
     }
     
 
-    getParamsAPI(){
+    getParamsAPI(api){
         try {
-            if(this.props.api)
+            if(api)
             {
-                var url_complete = this.props.api.url;
+                var url_complete = api.url;
                 
-                var lparam=this.props.api.params.map(
+                var lparam=api.params.map(
                     element=>{
                         let objName = Object.keys(element)[0];
                         return objName+"="+element[objName];
@@ -64,7 +64,7 @@ class SurveyGroup extends GenericGroup {
             var self=this;
             this.setState({children:[]});
 
-            this.consumeAPI(self.getParamsAPI(),function(){
+            this.consumeAPI(self.getParamsAPI(nextProps.api),function(){
                 self.createReport();
                 self._isMounted = true;
             });
@@ -79,7 +79,7 @@ class SurveyGroup extends GenericGroup {
     componentDidMount()
     {
         var self=this;
-        this.consumeAPI(self.getParamsAPI(),function(){
+        this.consumeAPI(self.getParamsAPI(this.props.api),function(){
             self.createReport();
             self._isMounted = true;
         });
