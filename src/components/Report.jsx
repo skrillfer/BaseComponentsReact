@@ -86,6 +86,10 @@ class Report extends Component {
     {      
       this.setState({currentGroup:id});
     }
+
+    componentDidUpdate(){
+      if(this.state.currentGroup!=''){this.setState({currentGroup:''});}
+    }
     receiveControls(controls)
     {
       this._listControl = controls;
