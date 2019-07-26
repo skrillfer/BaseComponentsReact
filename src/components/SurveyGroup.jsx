@@ -108,9 +108,7 @@ class SurveyGroup extends GenericGroup {
                         );
                         count++;
                     }
-                    chartArray.push(<div className="row justify-content-around mb-5">
-                                        {containerElements}
-                                    </div>);
+                    chartArray.push(containerElements);
                 }
             );
         }else
@@ -127,9 +125,7 @@ class SurveyGroup extends GenericGroup {
                     );
                 }
             );
-            chartArray.push(<div className="row justify-content-around mb-5">
-                                        {containerElements}
-                                    </div>);
+            chartArray.push(containerElements);
         }
 
         this.setState({children:chartArray});    

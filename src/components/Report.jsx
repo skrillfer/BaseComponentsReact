@@ -100,9 +100,14 @@ class Report extends Component {
                       <React.Fragment>
                         <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime',placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime',placeHolder:'fecha final',type:'Calendar'}},{SurveyButton:{id:'g1',label:'Buscar',type:'Button'}}]}></SurveyForms>
                       <hr/>
-                      <SurveyGroup api={this.getApi("data1")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Dispositivos","pageSize":10 }}]} />
-                      <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehiculos","pageSize":10 }}]} />
-                      <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Actividad","pageSize":10 }}]} />
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data1")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Dispositivos","pageSize":10 }}]} />
+                        <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehiculos","pageSize":10 }}]} />
+                      </div>
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Actividad","pageSize":10 }}]} />
+                      </div>
+                      
                       </React.Fragment>:null
                   }
                 </div>
