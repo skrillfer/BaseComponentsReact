@@ -98,12 +98,14 @@ class SurveyGroup extends GenericGroup {
             this._isMounted=false;
 
             var self=this;
-            /*this.consumeAPI(self.getParamsAPI(),function(){
+            this.setState({children:[]});
+
+            this.consumeAPI(self.getParamsAPI(),function(){
                 console.log('Consume API');
                 self.createReport();
                 self._isMounted = true;
-                console.log('Terminado');
-            });*/
+                console.log('>>>Terminado');
+            });
             return false;
         }else
         {

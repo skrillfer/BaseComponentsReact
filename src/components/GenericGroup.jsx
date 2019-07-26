@@ -33,7 +33,6 @@ class GenericGroup extends Component {
                 console.log('consumido de manera exitosa');
             } catch (error) {
                 this.setState({
-                        labels : [],
                         feed   : []
                 });
                 console.log("Error al parsear a json:"+error);

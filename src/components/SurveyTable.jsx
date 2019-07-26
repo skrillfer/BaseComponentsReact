@@ -9,7 +9,13 @@ class SurveyTable extends ComponentGeneric {
       super(props);
       this.generateCSVFile = this.generateCSVFile.bind(this);
     }
-  
+    
+   componentWillUnmount(){
+      console.log('Tabla sera Desmontada');
+   }
+   componentDidUpdate(){
+      console.log('Tabla fue actualizada');
+   }
    componentDidMount()
    {        
       const {feed,labels} = this.state;  
