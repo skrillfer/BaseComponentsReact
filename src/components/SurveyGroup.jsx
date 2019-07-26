@@ -14,6 +14,7 @@ class SurveyGroup extends GenericGroup {
           labels:[],
           feed  :[]
       }
+      this._isMounted =false;
       this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
     }
     
@@ -33,7 +34,8 @@ class SurveyGroup extends GenericGroup {
 
     onChangeDatePicker(args){
         const {children} = this.state;
-        try {
+        console.log(args);
+        /*try {
             this.arrayDatePicker[args.element.id]=args.value;
             if(children.length>0){
                 
@@ -49,18 +51,44 @@ class SurveyGroup extends GenericGroup {
                 finDate = new Date(finDate);
                 if(!isNaN(iniDate) && !isNaN(finDate))
                 {
-                    /*this.setState({children:[]});
+                    this.setState({children:[]});
                     console.log('consumiendo');
                     let self = this;
                     this.consumeAPI({inidate:iniDate.toISOString(),findate:finDate.toISOString()},function(){
                         self.createReport();
-                    });*/
+                    });
                 }  
             }
         } catch (error) {
             console.log('Error in event onChangeDatePicker'+error);
-        }
+        }*/
     }   
+
+    
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        if(!this._isMounted){ console.log('>>dale'); return true;}
+        console.log(nextProps.currentGroup+" <> "+this.props.keym);
+        if(nextProps.currentGroup==this.props.keym)
+        {
+            console.log('>>>>>>Me debo actualizar');
+            this._isMounted=false;
+
+            var self=this;
+            this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
+                console.log('Consume API');
+                self.createReport();
+                self._isMounted = true;
+                console.log('Terminado');
+            });
+            return false;
+        }else
+        {
+            console.log('No debo actualizarme');
+            return false;
+        }
+    }
+    
     componentWillUnmount(){
         console.log('Component Will unmount');
     }
@@ -69,8 +97,10 @@ class SurveyGroup extends GenericGroup {
         var self=this;
         this.consumeAPI({inidate:"2019-07-01+18%3A20",findate:"2019-07-16+18%3A20"},function(){
             console.log('Consume API');
+            console.log(self.props.keym);
             self.createReport();
             console.log('After Consume API');
+            self._isMounted = true;
         });
     }
     
@@ -119,6 +149,7 @@ class SurveyGroup extends GenericGroup {
                                         {containerElements}
                                     </div>);
         }
+
         this.setState({children:chartArray});    
     }
  
@@ -127,18 +158,7 @@ class SurveyGroup extends GenericGroup {
     render()
     {
         return <React.Fragment>
-                <div className="row">
-                    <div className="col-md-2 offset-md-3">
-                        <SurveyCalendar startAt={'ini'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Inicial'}></SurveyCalendar>
-                    </div>
-                    <div className="col-md-2">
-                        <SurveyCalendar startAt={'fin'} handler_onChange={this.onChangeDatePicker} placeHolder={'Fecha Final'}></SurveyCalendar>
-                    </div>
-                    <div className="col-md-2">
-                        <button type="button" class="btn btn-dark">Buscar</button>
-                    </div>
-                </div>
-                <hr/>
+                
                 {this.state.children.length==0?
                     <div className="text-center">
                     <div className="spinner-border" role="status">
@@ -146,8 +166,6 @@ class SurveyGroup extends GenericGroup {
                     </div>
                   </div>
                 :this.state.children}
-
-
             </React.Fragment>
     }
 }

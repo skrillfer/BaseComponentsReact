@@ -19,7 +19,7 @@ class SurveyCalendar extends Component {
     handleChange(e)
     {
         if(this.props.handler_onChange){
-            this.props.handler_onChange(e);
+            this.props.handler_onChange({id:this.props.startAt,value:e.value});
         }
     }
     
