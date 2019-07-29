@@ -48,11 +48,11 @@ class SurveyGroup extends GenericGroup {
         switch(chartName)
         {
             case "SurveyTable":
-                return <SurveyTable key={this.state.children.length} pageSize={pageSize} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyTable>
+                return <SurveyTable key={this.state.children.length} pageSize={pageSize} labels={labels} feed={feed}></SurveyTable>
             case "SurveyHis":
-                return <SurveyHis   key={this.state.children.length} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyHis>
+                return <SurveyHis   key={this.state.children.length}  labels={labels} feed={feed}></SurveyHis>
             case "SurveyStepper":
-                return <SurveyStepper key={this.state.children.length} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyStepper>
+                return <SurveyStepper key={this.state.children.length}  labels={labels} feed={feed}></SurveyStepper>
 
         }
     }

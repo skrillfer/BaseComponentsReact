@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import SurveyGroup from './SurveyGroup.jsx';
 import SurveyForms from './SurveyForms.jsx';
-import SurveyStepper from "./SurveyStepper.jsx";
+
 
 
 class Report extends Component {
