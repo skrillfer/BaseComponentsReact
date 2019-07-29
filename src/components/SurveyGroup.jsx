@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import GenericGroup from "./GenericGroup.jsx";
 import SurveyTable  from "./SurveyTable.jsx";
 import SurveyHis from "./SurveyHis.jsx";
-
+import SurveyStepper from "./SurveyStepper.jsx";
 
 class SurveyGroup extends GenericGroup {
     constructor(props) {
@@ -51,6 +51,9 @@ class SurveyGroup extends GenericGroup {
                 return <SurveyTable key={this.state.children.length} pageSize={pageSize} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyTable>
             case "SurveyHis":
                 return <SurveyHis   key={this.state.children.length} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyHis>
+            case "SurveyStepper":
+                return <SurveyStepper key={this.state.children.length} title={'Evaluacion de Servicio'} labels={labels} feed={feed}></SurveyStepper>
+
         }
     }
     

@@ -11,6 +11,9 @@ module.exports = {
                 libraryTarget: 'var'
                 
             },
+    performance: {
+        hints: false
+        },
     module:{
         rules:[{
                     test: /\.(js|jsx)$/,

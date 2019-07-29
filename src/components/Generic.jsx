@@ -106,13 +106,13 @@ class ComponentGeneric extends Component {
               }else
               {
                 array_data.push(
-                  {
+                  this.createObjectDataSet({
                     label : val.tag,
                     backgroundColor : this.generateOnlyColor(),
                     borderColor: this.generateOnlyColor(),
                     borderWidth : 1,
                     data : this.getAllColumnsIndexOf(colum),
-                  }
+                  },typeChart)
                 );
               }
               
@@ -130,11 +130,11 @@ class ComponentGeneric extends Component {
           {
               dataSET.labels = this.getValuesForChart('categoric');
               array_data.push(
-                {
+                this.createObjectDataSet({
                   label: "",
                   backgroundColor: this.generateRandomColor(dataSET.labels.length),
-                  data: this.getValuesForChart('numeric')
-                }
+                  data: this.getValuesForChart('numeric'),
+                },typeChart)
               );
               dataSET.datasets = array_data;
           }
@@ -144,6 +144,19 @@ class ComponentGeneric extends Component {
       return dataSET;
     }
 
+    createObjectDataSet(dataSetObject,typeChart){
+      switch(typeChart){
+        case "line":
+          dataSetObject['fill']=this.getFill(typeChart);
+          dataSetObject['lineTension']=this.getTensionLine(typeChart);
+          dataSetObject ['borderColor']=this.generateOnlyColor();
+          dataSetObject['borderWidth'] = 3;
+          dataSetObject.backgroundColor =dataSetObject.borderColor;
+          return dataSetObject;
+        default:
+            return dataSetObject;
+      }
+    }
     getValueNumericIndexOf(row,col)
     {
       try {
@@ -181,6 +194,22 @@ class ComponentGeneric extends Component {
       })
     }
 
+    getTensionLine(type){
+      switch(type){
+        case "line":
+          return 0.1;
+        default:
+          return 0.4;
+      }
+    }
+    getFill(type){
+      switch(type){
+        case "line":
+          return false;
+        default:
+          return true;
+      }
+    }
     getSeries()
     {
       var seriesLabels=[];
