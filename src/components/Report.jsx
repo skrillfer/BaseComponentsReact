@@ -84,26 +84,6 @@ class Report extends Component {
         }
     }
 
-    getData()
-    {
-    let  labels= [ 
-        {"tag":"Caracteristica","type":"categoric","serie":"true"},
-        {"tag":"American Express","type":"numeric","serie":"false"},
-        {"tag":"MasterCard","type":"numeric","serie":"false"},
-        {"tag":"PayPal","type":"numeric","serie":"false"},
-        {"tag":"Visa","type":"numeric","serie":"false"},
-      ]
-
-let feed = [
-  ["Credibilidad",60,70,80,90],
-  ["Transparencia",90,90,75,89],
-  ["Soporte",67,78,85,83],
-  ["Regalias",32,48,55,13],
-]
-
-      return {'feed':feed,'labels':labels};
-    }
-
     receiveClick(id)
     {      
       this.setState({currentGroup:id});
@@ -134,9 +114,7 @@ let feed = [
                 <li className="nav-item" onClick={()=>{this.customOnSelect("2")}}>
                   <a className="nav-link" data-toggle="tab" href="#menu1">Por Grupo</a>
                 </li>
-                <li className="nav-item" onClick={()=>{this.customOnSelect("3")}}>
-                  <a className="nav-link" data-toggle="tab" href="#menu2">Por Vehiculo</a>
-                </li>
+                
               </ul>
 
               <div class="tab-content">
@@ -173,19 +151,6 @@ let feed = [
                 }
                 </div>
 
-                <div id="menu2" class="container-fluid tab-pane fade"><br/>
-                  {this.isActivated('3',this.state.item==3)?
-                    <React.Fragment>
-                      <hr/>
-                      <div className="row justify-content-around mb-5">
-                        <div className="col">
-                          <SurveyStepper key={23} title={'Timeline'} labels={this.getData().labels} feed={this.getData().feed}></SurveyStepper>
-                        </div>
-                        
-                      </div>
-                    </React.Fragment>:null
-                }
-                </div>
               </div>
             </React.Fragment>
             
