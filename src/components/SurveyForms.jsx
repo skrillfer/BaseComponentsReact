@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SurveyCalendar from './inputs-component/SurveyCalendar.jsx';
-import {SurveyInput} from './inputs-component/SurveyInput.jsx'
-import {SurveyButton} from './inputs-component/SurveyButton.jsx';
+import SurveyCalendar from './input-components/SurveyCalendar.jsx';
+import {SurveyInput} from './input-components/SurveyInput.jsx'
+import {SurveyButton} from './input-components/SurveyButton.jsx';
 
 class SurveyForms extends Component {
     constructor(props)
