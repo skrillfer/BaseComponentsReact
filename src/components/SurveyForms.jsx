@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SurveyCalendar from './inputs-component/SurveyCalendar.jsx';
-import SurveyInput from './inputs-component/SurveyInput.jsx'
-import SurveyButton from './inputs-component/SurveyButton.jsx';
+import {SurveyInput} from './inputs-component/SurveyInput.jsx'
+import {SurveyButton} from './inputs-component/SurveyButton.jsx';
 
 class SurveyForms extends Component {
     constructor(props)
@@ -27,15 +27,29 @@ class SurveyForms extends Component {
         {
             case "SurveyCalendar":
                 return <div className="col">
-                        <SurveyCalendar startAt={id} handler_onChange={this.onChangeControl} placeHolder={placeHolder}></SurveyCalendar>
+                        <SurveyCalendar 
+                            startAt={id} 
+                            handler_onChange={this.onChangeControl} 
+                            placeHolder={placeHolder}
+                        />
                        </div>
             case "SurveyInput":
                 return  <div className="col">
-                        <SurveyInput    startAt={id} handler_onChange={this.onChangeControl} placeHolder={placeHolder} ></SurveyInput>
+                        <SurveyInput    
+                            startAt={id} 
+                            handleChange={
+                                (evt)=>{this.onChangeControl({id:id,value:evt.target.value})}
+                            }
+                            placeHolder={placeHolder} 
+                        />
                         </div>
             case "SurveyButton":
                 return  <div className="col">
-                        <SurveyButton   startAt={id} handler_onClick={this.onClickControl} label={label} ></SurveyButton>
+                        <SurveyButton   
+                            startAt={id} 
+                            handleClick={(evt)=>this.onClickControl(id)} 
+                            label={label} 
+                        />
                     </div>
         }
     }
@@ -51,12 +65,11 @@ class SurveyForms extends Component {
     }
     render()
     {
-        return(<React.Fragment>
+        return(
             <div className="row justify-content-around">
                 {this.createForm()}
             </div>
-            
-        </React.Fragment>);
+            );
     }
 }
 export default SurveyForms;
