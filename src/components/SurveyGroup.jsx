@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import GenericGroup from "./GenericGroup.jsx";
+import GenericGroup from "./generic-components/GenericGroup.jsx";
 import SurveyTable  from "./charts-components/table-component/SurveyTable.jsx";
 import SurveyHis from "./charts-components/SurveyHis.jsx";
 import SurveyStepper from "./charts-components/SurveyStepper.jsx";

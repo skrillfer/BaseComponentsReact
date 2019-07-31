@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ComponentGeneric from "../Generic.jsx";
+import ComponentGeneric from "../generic-components/Generic.jsx";
 
 class SurveyHis extends ComponentGeneric {
     constructor(props) {
