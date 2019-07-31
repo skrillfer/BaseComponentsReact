@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
+import ComponentGeneric from "../Generic.jsx";
 
-import ComponentGeneric from "./Generic.jsx";
-
-class SurveyHis extends ComponentGeneric {
+class SurveyPie extends ComponentGeneric {
     constructor(props) {
       super(props);
     }
   
    componentDidMount()
    {
-      var dataSET=this.validateDataForChart('');
-
-      new Chart(document.getElementById("bar_"+this.state.key), {
-        type: 'bar',
+      var dataSET=this.validateDataForChart('pie');
+      
+      new Chart(document.getElementById("pie_"+this.state.key), {
+        type: 'pie',
         data: dataSET,
         options: {
           legend: { display: true },
           title: {
             display: true,
-            //text: this.state.title
+            text: this.state.title
           }
         }
       });
@@ -30,10 +29,13 @@ class SurveyHis extends ComponentGeneric {
         return (
            
               <div className="card" style={{"display":"display: inline-block"}}>
+                 <h4 className="card-title">{this.state.title}</h4>
+  
                  <div className="card-header">
                  </div>
                  <div className="card-body">
-                    <canvas id={"bar_"+this.state.key}></canvas>
+                  <canvas id={"pie_"+this.state.key} width="800" height="450"></canvas>
+
                  </div> 
                  
               </div>  
@@ -41,4 +43,4 @@ class SurveyHis extends ComponentGeneric {
      }
 }
 
-export default SurveyHis;
+export default SurveyPie;

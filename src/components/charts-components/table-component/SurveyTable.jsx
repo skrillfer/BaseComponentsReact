@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import ComponentGeneric from "./Generic.jsx";
+import ComponentGeneric from "../../Generic.jsx";
 
-import style  from './style.css';
+import style  from './table.styles.css';
 
 class SurveyTable extends ComponentGeneric {
     constructor(props) {

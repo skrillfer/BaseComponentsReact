@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import GenericGroup from "./GenericGroup.jsx";
-import SurveyTable  from "./SurveyTable.jsx";
-import SurveyHis from "./SurveyHis.jsx";
-import SurveyStepper from "./SurveyStepper.jsx";
+import SurveyTable  from "./charts-components/table-component/SurveyTable.jsx";
+import SurveyHis from "./charts-components/SurveyHis.jsx";
+import SurveyStepper from "./charts-components/SurveyStepper.jsx";
 
 class SurveyGroup extends GenericGroup {
     constructor(props) {

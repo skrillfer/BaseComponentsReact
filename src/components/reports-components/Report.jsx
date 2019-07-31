@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import SurveyGroup from './SurveyGroup.jsx';
-import SurveyForms from './SurveyForms.jsx';
+import SurveyGroup from '../SurveyGroup.jsx';
+import SurveyForms from '../SurveyForms.jsx';
 
 
 
