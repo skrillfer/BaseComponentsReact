@@ -27,7 +27,8 @@ class SurveyTable extends ComponentGeneric {
                "scrollX": false,
                 dom: 'Bfrtip',
                   buttons: [
-                        'columnsToggle'
+                        'csv',
+                        'colvis'
                   ]
             });
          });  
@@ -121,11 +122,7 @@ class SurveyTable extends ComponentGeneric {
     render() {
         return (
                
-              <div className="card" style={{"display":"display: inline-block"}}>
-                 <div className="card-header">
-                 <button type="button" className="btn btn-link" onClick={this.generateCSVFile}><small>Descargar CSV</small></button>
-                 </div>
-                 <div className="card-body">
+
                     <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
                        <thead>
                             {this.renderTableHeaders()}
@@ -134,9 +131,7 @@ class SurveyTable extends ComponentGeneric {
                             {this.renderTableData()}
                        </tbody>
                     </table>
-                 </div> 
-                 
-              </div>  
+
         )
      }
 }
