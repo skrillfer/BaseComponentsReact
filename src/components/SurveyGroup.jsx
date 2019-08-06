@@ -105,8 +105,14 @@ class SurveyGroup extends GenericGroup {
                         let objName = Object.keys(chart)[0]
                         containerElements.push(
                             <div className="col">
-                                <h1 class="display-4">{chart[objName].title}</h1>
-                                {this.injectChart(objName,chart[objName].pageSize)}
+                                <div className="card" style={{"display":"display: inline-block"}}>
+                                    <div className="card-header">
+                                        <h1 class="display-4">{chart[objName].title}</h1>
+                                    </div>
+                                    <div className="card-body">
+                                        {this.injectChart(objName,chart[objName].pageSize)}
+                                    </div>
+                                </div>
                             </div>
                         );
                         count++;
@@ -122,8 +128,14 @@ class SurveyGroup extends GenericGroup {
                     let objName = Object.keys(chart)[0];
                     containerElements.push(
                         <div className="col">
-                            <h1 class="display-4">{chart[objName].title}</h1>
+                        <div className="card" style={{"display":"display: inline-block"}}>
+                            <div className="card-header">
+                                <h1 class="display-4">{chart[objName].title}</h1>
+                            </div>
+                            <div className="card-body">
                             {this.injectChart(objName,chart[objName].pageSize)}
+                        </div>
+                        </div>
                         </div>
                     );
                 }
