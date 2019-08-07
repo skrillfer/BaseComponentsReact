@@ -41,19 +41,33 @@ class SurveyGroup extends GenericGroup {
     }
     
 
-    injectChart(chartName,pageSize)
+    injectChart(chartName,pageSize,columnDefs,handleColumnClick,name)
     {
-
         const {labels,feed} = this.state;
         switch(chartName)
         {
             case "SurveyTable":
-                return <SurveyTable key={this.state.children.length} pageSize={pageSize} labels={labels} feed={feed}></SurveyTable>
+                return <SurveyTable   
+                                key={this.state.children.length} 
+                                pageSize={pageSize} 
+                                labels={labels} 
+                                feed={feed} 
+                                columnDefs={columnDefs} 
+                                handleColumnClick={handleColumnClick}
+                                name ={name}
+                        />
             case "SurveyHis":
-                return <SurveyHis   key={this.state.children.length}  labels={labels} feed={feed}></SurveyHis>
+                return <SurveyHis     
+                                key={this.state.children.length}  
+                                labels={labels} 
+                                feed={feed}
+                        />
             case "SurveyStepper":
-                return <SurveyStepper key={this.state.children.length}  labels={labels} feed={feed}></SurveyStepper>
-
+                return <SurveyStepper 
+                                key={this.state.children.length}  
+                                labels={labels} 
+                                feed={feed}
+                        />
         }
     }
     
@@ -103,14 +117,16 @@ class SurveyGroup extends GenericGroup {
                         if(count>=nComponents.length){continue;}
                         let chart = nComponents[count];
                         let objName = Object.keys(chart)[0]
+                        
+                        const {title,pageSize,columnDefs,handleColumnClick,name}=chart[objName];
                         containerElements.push(
                             <div className="col">
                                 <div className="card" style={{"display":"display: inline-block"}}>
                                     <div className="card-header">
-                                        <h1 class="display-4">{chart[objName].title}</h1>
+                                        <h1 class="display-4">{title}</h1>
                                     </div>
                                     <div className="card-body">
-                                        {this.injectChart(objName,chart[objName].pageSize)}
+                                        {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name)}
                                     </div>
                                 </div>
                             </div>
@@ -126,23 +142,23 @@ class SurveyGroup extends GenericGroup {
             nComponents.map(
                 chart=>{
                     let objName = Object.keys(chart)[0];
+                    const {title,pageSize,columnDefs,handleColumnClick,name}=chart[objName];
                     containerElements.push(
                         <div className="col">
-                        <div className="card" style={{"display":"display: inline-block"}}>
-                            <div className="card-header">
-                                <h1 class="display-4">{chart[objName].title}</h1>
+                            <div className="card" style={{"display":"display: inline-block"}}>
+                                <div className="card-header">
+                                    <h1 class="display-4">{title}</h1>
+                                </div>
+                                <div className="card-body">
+                                {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name)}
+                                </div>
                             </div>
-                            <div className="card-body">
-                            {this.injectChart(objName,chart[objName].pageSize)}
-                        </div>
-                        </div>
                         </div>
                     );
                 }
             );
             chartArray.push(containerElements);
         }
-
         this.setState({children:chartArray});    
     }
  

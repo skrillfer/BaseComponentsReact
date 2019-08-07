@@ -13,12 +13,13 @@ class SurveyTable extends ComponentGeneric {
    
    componentDidMount()
    {        
-      const {feed,labels} = this.state;  
+      const {feed,labels,key} = this.state;  
+      const {pageSize,handleColumnClick,name}        = this.props;
       var self= this;
       if(feed.length>0 && labels.length>0){
          $(document).ready(function() {
-            $('#table_'+self.state.key).DataTable({
-               "pageLength": self.props.pageSize,
+            var table =  $('#table_'+key).DataTable({
+               "pageLength": pageSize,
                "bPaginate": true,
                "bLengthChange": false,
                "bFilter": true,
@@ -29,13 +30,37 @@ class SurveyTable extends ComponentGeneric {
                   buttons: [
                         'csv',
                         'colvis'
-                  ]
+                  ],
+               "columnDefs": self.getColumnDefs(),
             });
-         });  
-         
+
+            $('#table_'+key+' tbody').on('click', 'tr', function () {
+               if(handleColumnClick){
+                  var data = table.row(this).data();
+                  handleColumnClick({'name':name,'row':data});
+               }
+            });
+
+         });         
       } else{
          console.log('feed empty');
       }
+   }
+
+   getColumnDefs=()=>{
+      const {columnDefs} = this.props;
+      if(columnDefs!=null && columnDefs.length>0){
+         let arrDefs=columnDefs.map(it=>{
+            return {
+               "targets": it,
+               "render": function (data, type, full, meta){
+                     return '<a href="#">'+data+'</a>';         
+               }
+            };
+         });
+         return arrDefs;
+      }
+      return null;
    }
 
    generateCSVFile()
@@ -121,17 +146,14 @@ class SurveyTable extends ComponentGeneric {
 
     render() {
         return (
-               
-
-                    <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
-                       <thead>
-                            {this.renderTableHeaders()}
-                       </thead>
-                       <tbody>
-                            {this.renderTableData()}
-                       </tbody>
-                    </table>
-
+            <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
+               <thead>
+                     {this.renderTableHeaders()}
+               </thead>
+               <tbody>
+                     {this.renderTableData()}
+               </tbody>
+            </table>
         )
      }
 }
