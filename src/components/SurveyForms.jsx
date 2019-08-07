@@ -22,7 +22,7 @@ class SurveyForms extends Component {
         this.props.sendControls(this._valueControls);
     }
     
-    createControl(type,id,placeHolder,label){
+    createControl(type,id,placeHolder,label,value){
         switch(type)
         {
             case "SurveyCalendar":
@@ -31,6 +31,7 @@ class SurveyForms extends Component {
                             startAt={id} 
                             handler_onChange={this.onChangeControl} 
                             placeHolder={placeHolder}
+                            value = {value}
                         />
                        </div>
             case "SurveyInput":
@@ -58,7 +59,8 @@ class SurveyForms extends Component {
         var list_Controls=this.props.forms.map(
             item=>{
                 let objName = Object.keys(item)[0];
-                return this.createControl(objName,item[objName].id,item[objName].placeHolder,item[objName].label);
+                const {id,placeHolder,label,value} = item[objName];
+                return this.createControl(objName,id,placeHolder,label,value);
             }
         );
         return list_Controls;
