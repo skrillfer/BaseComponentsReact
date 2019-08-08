@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SurveyCalendar from './input-components/SurveyCalendar.jsx';
-import {SurveyInput} from './input-components/SurveyInput.jsx'
+import SurveyInput from './input-components/SurveyInput.jsx'
 import {SurveyButton} from './input-components/SurveyButton.jsx';
 
 class SurveyForms extends Component {
@@ -16,10 +16,11 @@ class SurveyForms extends Component {
     {
         this.props.sendClick(id);
     }
+
     onChangeControl(args)
     {
         this._valueControls[args.id]=args;
-        this.props.sendControls(this._valueControls);
+        this.props.sendControls(args);
     }
     
     createControl(type,id,placeHolder,label,value){
@@ -35,12 +36,14 @@ class SurveyForms extends Component {
                         />
                        </div>
             case "SurveyInput":
+                console.log(value);
                 return  <div className="col">
                         <SurveyInput    
                             startAt={id} 
                             handleChange={
                                 (evt)=>{this.onChangeControl({id:id,value:evt.target.value})}
                             }
+                            value={value}
                             placeHolder={placeHolder} 
                         />
                         </div>

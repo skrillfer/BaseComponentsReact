@@ -14,6 +14,7 @@ class Report extends Component {
       this.receiveClick = this.receiveClick.bind(this);
       this.getApi = this.getApi.bind(this);
       this._listControl = [];
+      this._defaultDates= this.getDefaultDates();
     }
     
     
@@ -39,32 +40,39 @@ class Report extends Component {
       switch(name){
         case "data1":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"activedevices"},{stime:this.getValueParam('stime','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"activedevices"},{stime:this.getValueParam('stime','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime','fecha',this._defaultDates.etime)}]
                    }
                   
         case "data2":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"topassets"},{stime:this.getValueParam('stime','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"topassets"},{stime:this.getValueParam('stime','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime','fecha',this._defaultDates.etime)}]
                    }
                   
         case "data3":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"summaryalarm"},{stime:this.getValueParam('stime','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"summaryalarm"},{stime:this.getValueParam('stime','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime','fecha',this._defaultDates.etime)}]
                    }
         case "data4":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"topalarm"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g2','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"topalarm"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g2','fecha',this._defaultDates.etime)}]
                    }
         case "data5":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"topassets"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g2','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"topassets"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g2','fecha',this._defaultDates.etime)}]
                    }
         case "data6":
             return {
-                      url:"http://209.105.248.173/api.php?",params:[{report:"speedalarms"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g2','fecha',"2019-07-09+18%3A20")}]
+                      url:"http://209.105.248.173/api.php?",params:[{report:"speedalarms"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g2','fecha',this._defaultDates.etime)}]
                     }
                   
       }
+    }
+
+    getDefaultDates=()=>{
+      var today = new Date();
+      var previusDate = new Date();
+      previusDate.setDate(today.getDate() - 7);
+      return {stime:previusDate.toISOString(),etime:today.toISOString()};
     }
 
     isActivated(id,flag)
@@ -87,16 +95,17 @@ class Report extends Component {
     receiveColumnClicked=(args)=>{
         switch(args.name){
           case "table_1":
+            this._listControl['gid_g2']={value:args.row[1]};
             $('.nav-tabs a[href="#menu1"]').tab('show');
-            this.setState({item:2},()=>{document.getElementById('gid_g2').value=args.row[0];});
-            
+            this.setState({item:2},()=>{
+                this.receiveClick('g2');
+              });
             break;
         }
-        console.log(args);
     }
 
     receiveClick(id)
-    {      
+    { 
       this.setState({currentGroup:id});
     }
 
@@ -104,9 +113,9 @@ class Report extends Component {
       if(this.state.currentGroup!=''){this.setState({currentGroup:''});}
     }
       
-    receiveControls(controls)
+    receiveControls(args)
     {
-      this._listControl = controls;
+      this._listControl[args.id]=args;
     }
 
     customOnSelect(index)
@@ -134,7 +143,7 @@ class Report extends Component {
                   
                   {this.isActivated('1',this.state.item==1)?
                       <React.Fragment>
-                        <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime',value:'2019/08/07',placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime',placeHolder:'fecha final',type:'Calendar'}},{SurveyButton:{id:'g1',label:'Buscar',type:'Button'}}]}></SurveyForms>
+                        <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyButton:{id:'g1',label:'Buscar',type:'Button'}}]}></SurveyForms>
                       <hr/>
                       <div className="row justify-content-around mb-5">
                         <SurveyGroup api={this.getApi("data1")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Dispositivos",pageSize:10 }}]} />
@@ -150,7 +159,7 @@ class Report extends Component {
                 <div id="menu1" class="container-fluid tab-pane fade"><br/>
                   {this.isActivated('2',this.state.item==2)?
                     <React.Fragment>
-                      <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime_g2',placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime_g2',placeHolder:'fecha final',type:'Calendar'}},{SurveyInput:{id:'gid_g2',placeHolder:'Ingrese grupo',type:'number'}},{SurveyButton:{id:'g2',label:'Buscar',type:'Button'}}]}></SurveyForms>
+                      <SurveyForms  sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime_g2',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime_g2',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyInput:{id:'gid_g2',value:this.getValueParam('gid_g2','num',"145"),placeHolder:'Ingrese grupo',type:'number'}},{SurveyButton:{id:'g2',label:'Buscar',type:'Button'}}]}></SurveyForms>
                       <hr/>
                       <div className="row justify-content-around mb-5">
                         <SurveyGroup api={this.getApi("data4")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Alertas","pageSize":10 }}]} />
