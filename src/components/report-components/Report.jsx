@@ -9,14 +9,9 @@ class Report extends Component {
     constructor(props){
       super(props);
       this.state={item:1,listActivates:{},currentGroup:''};
-      this.isActivated = this.isActivated.bind(this);
-      this.receiveControls = this.receiveControls.bind(this);
-      this.receiveClick = this.receiveClick.bind(this);
-      this.getApi = this.getApi.bind(this);
       this._listControl = [];
       this._defaultDates= this.getDefaultDates();
     }
-    
     
     getValueParam(id,type,defaul_t)
     {
@@ -36,7 +31,8 @@ class Report extends Component {
         return defaul_t;
       }
     }
-    getApi(name){
+
+    getApi=(name)=>{
       switch(name){
         case "data1":
             return {
@@ -75,8 +71,7 @@ class Report extends Component {
       return {stime:previusDate.toISOString(),etime:today.toISOString()};
     }
 
-    isActivated(id,flag)
-    {
+    isActivated=(id,flag)=>{
         if(this.state.listActivates[id])
         {
           return true;
@@ -104,16 +99,13 @@ class Report extends Component {
         }
     }
 
-    receiveClick(id)
-    { 
-      this.setState({currentGroup:id});
-    }
+    receiveClick=(id)=>{   this.setState({currentGroup:id});  }
 
     componentDidUpdate(){
       if(this.state.currentGroup!=''){this.setState({currentGroup:''});}
     }
       
-    receiveControls(args)
+    receiveControls=(args)=>
     {
       this._listControl[args.id]=args;
     }
