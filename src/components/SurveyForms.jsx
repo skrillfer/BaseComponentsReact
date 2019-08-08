@@ -36,7 +36,6 @@ class SurveyForms extends Component {
                         />
                        </div>
             case "SurveyInput":
-                console.log(value);
                 return  <div className="col">
                         <SurveyInput    
                             startAt={id} 
