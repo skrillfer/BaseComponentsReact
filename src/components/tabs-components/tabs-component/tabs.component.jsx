@@ -13,36 +13,49 @@ class Tabs extends Component {
     this.state = {
       activeTab: this.getInitialActiveTab(),
       item:this.props.setTabActive,
-      
     };
     this.listActivates={};
   }
 
-  getInitialActiveTab =()=>{
-    return this.props.children[this.props.setTabActive-1].props.label;
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps.setTabActive!=this.state.item){
+      this.setState({ 
+          item:nextProps.setTabActive,
+          activeTab:this.getInitialActiveTab(nextProps.setTabActive)
+        });
+    }
+    return true;
   }
+
+  getInitialActiveTab =(val)=>{
+    const {children,setTabActive}= this.props;
+    try {
+      if(val){
+        return children[val-1].props.label;  
+      }
+      return children[setTabActive-1].props.label;  
+    } catch (error) {
+      return children[0].props.label;  
+    }
+  }
+
   getClassActive=(i)=>{
-    if(i==this.state.item ){
-      console.log('active:'+i);
+    const {item}= this.state;
+    if(i==item){
       return ' active';
     }
     return ' fade';
   }
 
   isActivated=(id,flag)=>{
-    if(this.listActivates[id])
-    {
+    if(this.listActivates[id]){
       return true;
-    }else
-    {
-      if(flag)
-      {
-        this.listActivates[id]=true;
-        return true;
-      }else{
-        return false;
-      }
     }
+    if(flag){
+      this.listActivates[id]=true;
+      return true;
+    }
+    return false;
   }
 
   onClickTabItem = (tab,index) => {
@@ -89,7 +102,6 @@ class Tabs extends Component {
                 }
               </div>
             )
-
           })}
         </div>
       </div>
