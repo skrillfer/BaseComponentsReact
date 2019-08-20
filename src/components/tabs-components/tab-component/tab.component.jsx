@@ -34,7 +34,7 @@ class Tab extends Component {
 
     return (
       <li className="nav-item" onClick={onClick}>
-        <a className={className} data-toggle="tab" href={"_"+index}>{label}</a>
+        <a className={className} data-toggle="tab" href={"$tab"+index}>{label}</a>
        </li>
     );
   }

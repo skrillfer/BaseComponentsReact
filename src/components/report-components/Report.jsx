@@ -119,7 +119,7 @@ class Report extends Component {
       return (
         <div>
           <h1>Tabs Demo</h1>
-         <Tabs itemParent={this.props.item}>
+         <Tabs setTabActive={2}>
           <div label="Resumen">
             <React.Fragment>
               <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyButton:{id:'g1',label:'Buscar',type:'Button'}}]}></SurveyForms>

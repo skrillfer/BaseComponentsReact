@@ -11,15 +11,19 @@ class Tabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: this.props.children[0].props.label,
-      item:0,
-      itemParent:this.props.itemParent
+      activeTab: this.getInitialActiveTab(),
+      item:this.props.setTabActive,
+      
     };
     this.listActivates={};
   }
 
+  getInitialActiveTab =()=>{
+    return this.props.children[this.props.setTabActive-1].props.label;
+  }
   getClassActive=(i)=>{
-    if(i==this.state.item || this.props.itemParent==i){
+    if(i==this.state.item ){
+      console.log('active:'+i);
       return ' active';
     }
     return ' fade';
@@ -61,7 +65,7 @@ class Tabs extends Component {
         <ul className="nav nav-tabs" role="tablist">
           {children.map((child,index) => {
             const { label } = child.props;
-
+            index++;
             return (
               <Tab
                 activeTab={activeTab}
@@ -75,12 +79,11 @@ class Tabs extends Component {
         </ul>
         <div className="tab-content">
           {children.map((child,index) => {
-            /*if (child.props.label !== activeTab) return undefined;
-            return child.props.children;*/
+            index++;
             return(
-              <div id={index} className={"container-fluid tab-pane "+this.getClassActive(index)}>
+              <div id={'$tab'+index} className={"container-fluid tab-pane "+this.getClassActive(index)}>
                 <br/>
-                {this.isActivated(index+'',this.state.item==index || this.props.itemParent)?
+                {this.isActivated(index+'',this.state.item==index)?
                   child.props.children
                   :null
                 }
