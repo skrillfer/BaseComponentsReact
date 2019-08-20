@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import SurveyGroup from '../SurveyGroup.jsx';
 import SurveyForms from '../SurveyForms.jsx';
 
-
+import Tabs from '../tabs-components/tabs-component/tabs.component.jsx';
 
 class Report extends Component {
     constructor(props){
@@ -91,7 +91,7 @@ class Report extends Component {
         switch(args.name){
           case "table_1":
             this._listControl['gid_g2']={value:args.row[1]};
-            $('.nav-tabs a[href="#menu1"]').tab('show');
+            $('.nav-tabs a[href="#_1"]').tab('show');
             this.setState({item:2},()=>{
                 this.receiveClick('g2');
               });
@@ -116,8 +116,43 @@ class Report extends Component {
     }
 
     render(){
-        
-        return (
+      return (
+        <div>
+          <h1>Tabs Demo</h1>
+         <Tabs itemParent={this.props.item}>
+          <div label="Resumen">
+            <React.Fragment>
+              <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyButton:{id:'g1',label:'Buscar',type:'Button'}}]}></SurveyForms>
+              <hr/>
+              <div className="row justify-content-around mb-5">
+                <SurveyGroup api={this.getApi("data1")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Dispositivos",pageSize:10 }}]} />
+                <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Top 5 Vehiculos",pageSize:10,columnDefs:[] }}]} />
+              </div>
+              <div className="row justify-content-around mb-5">
+                <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Actividad",pageSize:10,columnDefs:[0],handleColumnClick:this.receiveColumnClicked,name:'table_1' }}]} />
+              </div>
+            </React.Fragment>
+          </div>
+          <div label="Por Grupo">
+            <React.Fragment>
+              <SurveyForms  sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime_g2',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime_g2',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyInput:{id:'gid_g2',value:this.getValueParam('gid_g2','num',"145"),placeHolder:'Ingrese grupo',type:'number'}},{SurveyButton:{id:'g2',label:'Buscar',type:'Button'}}]}></SurveyForms>
+              <hr/>
+              <div className="row justify-content-around mb-5">
+                <SurveyGroup api={this.getApi("data4")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Alertas","pageSize":10 }}]} />
+                <SurveyGroup api={this.getApi("data5")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehiculos","pageSize":10 }}]} />
+              </div>
+              <div className="row justify-content-around mb-5">
+                <SurveyGroup api={this.getApi("data6")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Velocidad Maxima","pageSize":10 }}]} />
+              </div>
+            </React.Fragment>
+          </div>
+          <div label="Sarcosuchus">
+            Nothing to see here, this tab is <em>extinct</em>!
+          </div>
+        </Tabs>
+        </div>
+      );
+        /*return (
             <React.Fragment>
               
               <ul className="nav nav-tabs" role="tablist">
@@ -142,7 +177,7 @@ class Report extends Component {
                         <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Top 5 Vehiculos",pageSize:10,columnDefs:[] }}]} />
                       </div>
                       <div className="row justify-content-around mb-5">
-                        <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Actividad",pageSize:10,columnDefs:[1],handleColumnClick:this.receiveColumnClicked,name:'table_1' }}]} />
+                        <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Actividad",pageSize:10,columnDefs:[0],handleColumnClick:this.receiveColumnClicked,name:'table_1' }}]} />
                       </div>
                       </React.Fragment>:null
                   }
@@ -167,7 +202,7 @@ class Report extends Component {
               </div>
             </React.Fragment>
             
-          );
+          );*/
     }
 }
 
