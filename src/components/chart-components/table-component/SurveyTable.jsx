@@ -52,14 +52,23 @@ class SurveyTable extends ComponentGeneric {
 
    formatColorCell=()=>{
       const {labels} = this.props;
-      var flag = true;
+      var flag=true;
       if(flag){
          return function ( row, data, index ) {
-            if ( data[1].replace(/[\$,]/g, '') * 1 > 3 ) {
-               $('td', row).eq(1).css({"background-color":colors.colorRed});
-            }
+            labels.map(
+               (obj,ii)=>{    
+                  try {
+                     if ( data[ii].replace(/[\$,]/g, '') * 1 > 3 ) {
+                        $('td', row).eq(ii).css({"background-color":colors.colorRed});
+                     }  
+                  } catch (error) {
+                     
+                  }
+               }   
+            );
          }
       }
+
       /*
       td.highlight {
         font-weight: bold;
@@ -68,6 +77,8 @@ class SurveyTable extends ComponentGeneric {
       */
       return null;
    }
+
+   
    getColumnDefs=()=>{
       const {columnDefs} = this.props;
       if(columnDefs!=null && columnDefs.length>0){
