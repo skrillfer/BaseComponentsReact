@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import ComponentGeneric from "../../generic-components/Generic.jsx";
 
+import { colors } from "../../../constants/color";
+
 import style  from './table.styles.css';
 
 class SurveyTable extends ComponentGeneric {
@@ -32,6 +34,7 @@ class SurveyTable extends ComponentGeneric {
                         'colvis'
                   ],
                "columnDefs": self.getColumnDefs(),
+               "createdRow": self.formatColorCell(),
             });
 
             $('#table_'+key+' tbody').on('click', 'tr', function () {
@@ -47,6 +50,24 @@ class SurveyTable extends ComponentGeneric {
       }
    }
 
+   formatColorCell=()=>{
+      const {labels} = this.props;
+      var flag = true;
+      if(flag){
+         return function ( row, data, index ) {
+            if ( data[1].replace(/[\$,]/g, '') * 1 > 3 ) {
+               $('td', row).eq(1).css({"background-color":colors.colorRed});
+            }
+         }
+      }
+      /*
+      td.highlight {
+        font-weight: bold;
+        color: blue;
+      }
+      */
+      return null;
+   }
    getColumnDefs=()=>{
       const {columnDefs} = this.props;
       if(columnDefs!=null && columnDefs.length>0){
