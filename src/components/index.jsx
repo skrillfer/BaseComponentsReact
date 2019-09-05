@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import SurveyGroup from './SurveyGroup.jsx';
-import Report from "./Report.jsx";
+import Report from "./report-components/Report.jsx";
 
 var injectUIComponents = function(id,CONST_COLUMNS,COSNT_COMPO) {
     ReactDOM.render(

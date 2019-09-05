@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SurveyCalendar from './SurveyCalendar.jsx';
-import SurveyInput from './SurveyInput.jsx'
-import SurveyButton from './SurveyButton.jsx';
+import SurveyCalendar from './input-components/SurveyCalendar.jsx';
+import SurveyInput from './input-components/SurveyInput.jsx'
+import {SurveyButton} from './input-components/SurveyButton.jsx';
 
 class SurveyForms extends Component {
     constructor(props)
@@ -16,26 +16,43 @@ class SurveyForms extends Component {
     {
         this.props.sendClick(id);
     }
+
     onChangeControl(args)
     {
         this._valueControls[args.id]=args;
-        this.props.sendControls(this._valueControls);
+        this.props.sendControls(args);
     }
     
-    createControl(type,id,placeHolder,label){
+    createControl(type,id,placeHolder,label,value){
         switch(type)
         {
             case "SurveyCalendar":
                 return <div className="col">
-                        <SurveyCalendar startAt={id} handler_onChange={this.onChangeControl} placeHolder={placeHolder}></SurveyCalendar>
+                        <SurveyCalendar 
+                            startAt={id} 
+                            handler_onChange={this.onChangeControl} 
+                            placeHolder={placeHolder}
+                            value = {value}
+                        />
                        </div>
             case "SurveyInput":
                 return  <div className="col">
-                        <SurveyInput    startAt={id} handler_onChange={this.onChangeControl} placeHolder={placeHolder} ></SurveyInput>
+                        <SurveyInput    
+                            startAt={id} 
+                            handleChange={
+                                (evt)=>{this.onChangeControl({id:id,value:evt.target.value})}
+                            }
+                            value={value}
+                            placeHolder={placeHolder} 
+                        />
                         </div>
             case "SurveyButton":
                 return  <div className="col">
-                        <SurveyButton   startAt={id} handler_onClick={this.onClickControl} label={label} ></SurveyButton>
+                        <SurveyButton   
+                            startAt={id} 
+                            handleClick={(evt)=>this.onClickControl(id)} 
+                            label={label} 
+                        />
                     </div>
         }
     }
@@ -44,19 +61,19 @@ class SurveyForms extends Component {
         var list_Controls=this.props.forms.map(
             item=>{
                 let objName = Object.keys(item)[0];
-                return this.createControl(objName,item[objName].id,item[objName].placeHolder,item[objName].label);
+                const {id,placeHolder,label,value} = item[objName];
+                return this.createControl(objName,id,placeHolder,label,value);
             }
         );
         return list_Controls;
     }
     render()
     {
-        return(<React.Fragment>
+        return(
             <div className="row justify-content-around">
                 {this.createForm()}
             </div>
-            
-        </React.Fragment>);
+            );
     }
 }
 export default SurveyForms;

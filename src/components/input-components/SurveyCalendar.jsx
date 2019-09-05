@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class SurveyCalendar extends Component {
     constructor(props) {
         super(props); 
-        //title indica el nombre que aparecera en el picker
         this.state = {
             key: this.generateId(),
             _isPicker : false
@@ -27,9 +26,12 @@ class SurveyCalendar extends Component {
     {
         if(!this._isPicker)
         {
+          const {placeHolder,value}= this.props;  
           let self=this;  
           var datepicker = new ej.calendars.DatePicker({  
-              placeholder: this.props.placeHolder,
+              placeholder: placeHolder,
+              value: self.parseDate(value),
+              format: 'dd/MM/yyyy',
               change: function (args) {
                 self.handleChange(args);
               },
@@ -38,6 +40,14 @@ class SurveyCalendar extends Component {
           datepicker.appendTo('#'+this.key);
           this._isPicker = true;
         } 
+    }
+
+    parseDate=(dateValue)=>{
+        var timestamp = Date.parse(dateValue);
+        if (isNaN(timestamp) == false) {
+            return new Date(timestamp);
+        }
+        return null;
     }
 
     render()

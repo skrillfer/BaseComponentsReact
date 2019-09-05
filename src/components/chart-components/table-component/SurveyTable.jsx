@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import ComponentGeneric from "./Generic.jsx";
+import ComponentGeneric from "../../generic-components/Generic.jsx";
 
-import style  from './style.css';
+import { colors } from "../../../constants/color";
+
+import style  from './table.styles.css';
 
 class SurveyTable extends ComponentGeneric {
     constructor(props) {
@@ -13,12 +15,13 @@ class SurveyTable extends ComponentGeneric {
    
    componentDidMount()
    {        
-      const {feed,labels} = this.state;  
+      const {feed,labels,key} = this.state;  
+      const {pageSize,handleColumnClick,name}        = this.props;
       var self= this;
       if(feed.length>0 && labels.length>0){
          $(document).ready(function() {
-            $('#table_'+self.state.key).DataTable({
-               "pageLength": self.props.pageSize,
+            var table =  $('#table_'+key).DataTable({
+               "pageLength": pageSize,
                "bPaginate": true,
                "bLengthChange": false,
                "bFilter": true,
@@ -27,14 +30,69 @@ class SurveyTable extends ComponentGeneric {
                "scrollX": false,
                 dom: 'Bfrtip',
                   buttons: [
-                        'columnsToggle'
-                  ]
+                        'csv',
+                        'colvis'
+                  ],
+               "columnDefs": self.getColumnDefs(),
+               "createdRow": self.formatColorCell(),
             });
-         });  
-         
+
+            $('#table_'+key+' tbody').on('click', 'tr', function () {
+               if(handleColumnClick){
+                  var data = table.row(this).data();
+                  handleColumnClick({'name':name,'row':data});
+               }
+            });
+
+         });         
       } else{
          console.log('feed empty');
       }
+   }
+
+   formatColorCell=()=>{
+      const {labels} = this.props;
+      var flag=true;
+      if(flag){
+         return function ( row, data, index ) {
+            labels.map(
+               (obj,ii)=>{    
+                  try {
+                     if ( data[ii].replace(/[\$,]/g, '') * 1 > 3 ) {
+                        $('td', row).eq(ii).css({"background-color":colors.colorRed});
+                     }  
+                  } catch (error) {
+                     
+                  }
+               }   
+            );
+         }
+      }
+
+      /*
+      td.highlight {
+        font-weight: bold;
+        color: blue;
+      }
+      */
+      return null;
+   }
+
+   
+   getColumnDefs=()=>{
+      const {columnDefs} = this.props;
+      if(columnDefs!=null && columnDefs.length>0){
+         let arrDefs=columnDefs.map(it=>{
+            return {
+               "targets": it,
+               "render": function (data, type, full, meta){
+                     return '<a href="#">'+data+'</a>';         
+               }
+            };
+         });
+         return arrDefs;
+      }
+      return null;
    }
 
    generateCSVFile()
@@ -120,23 +178,14 @@ class SurveyTable extends ComponentGeneric {
 
     render() {
         return (
-               
-              <div className="card" style={{"display":"display: inline-block"}}>
-                 <div className="card-header">
-                 <button type="button" className="btn btn-link" onClick={this.generateCSVFile}><small>Descargar CSV</small></button>
-                 </div>
-                 <div className="card-body">
-                    <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
-                       <thead>
-                            {this.renderTableHeaders()}
-                       </thead>
-                       <tbody>
-                            {this.renderTableData()}
-                       </tbody>
-                    </table>
-                 </div> 
-                 
-              </div>  
+            <table class="table table-striped table-bordered" style={{"width":"100%"}} id={'table_'+this.state.key}>
+               <thead>
+                     {this.renderTableHeaders()}
+               </thead>
+               <tbody>
+                     {this.renderTableData()}
+               </tbody>
+            </table>
         )
      }
 }

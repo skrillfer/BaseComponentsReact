@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import ComponentGeneric from "./Generic.jsx";
+import ComponentGeneric from "../generic-components/Generic.jsx";
 
-class SurveyStepper extends ComponentGeneric {
+class SurveyHis extends ComponentGeneric {
     constructor(props) {
       super(props);
     }
   
    componentDidMount()
    {
-     var dataSET=this.validateDataForChart('line');
-      new Chart(document.getElementById("line_"+this.state.key), {
-        type: 'line',
+      var dataSET=this.validateDataForChart('');
+
+      new Chart(document.getElementById("bar_"+this.state.key), {
+        type: 'bar',
         data: dataSET,
         options: {
           legend: { display: true },
@@ -21,7 +22,10 @@ class SurveyStepper extends ComponentGeneric {
           }
         }
       });
-   } 
+   }
+
+   
+    
     render() {
         return (
            
@@ -29,11 +33,12 @@ class SurveyStepper extends ComponentGeneric {
                  <div className="card-header">
                  </div>
                  <div className="card-body">
-                    <canvas id={"line_"+this.state.key}></canvas>
+                    <canvas id={"bar_"+this.state.key}></canvas>
                  </div> 
+                 
               </div>  
         )
      }
 }
 
-export default SurveyStepper;
+export default SurveyHis;
