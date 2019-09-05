@@ -63,7 +63,22 @@ class Report extends Component {
             return {
                       url:"http://209.105.248.173/api.php?",params:[{report:"speedalarms"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g2','fecha',"2019-07-09+18%3A20")}]
                     }
-                  
+        case "data7":
+        return {
+                      url:"http://209.105.248.173/api.php?",params:[{report:"alarmevent"},{gid:this.getValueParam('gid_g2','num',"145")},{at:4107},{stime:this.getValueParam('stime_g2','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g2','fecha',"2019-07-09+18%3A20")}]
+                }
+        case "data8":
+        return {
+                      url:"http://209.105.248.173/api.php?",params:[{report:"topalarm"},{obj:'gid_g3'},{stime:this.getValueParam('stime_g3','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g3','fecha',"2019-07-09+18%3A20")}]
+        }
+        case "data9":
+        return {
+                      url:"http://209.105.248.173/api.php?",params:[{report:"speedalarms"},{obj:'gid_g3'},{stime:this.getValueParam('stime_g3','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g3','fecha',"2019-07-09+18%3A20")}]
+        }
+        case "data10":
+        return {
+                      url:"http://209.105.248.173/api.php?",params:[{report:"alarmevent"},{obj:'gid_g3'},{at:4107},{stime:this.getValueParam('stime_g3','fecha',"2019-07-08+18%3A20")},{etime:this.getValueParam('etime_g3','fecha',"2019-07-09+18%3A20")}]
+        }
       }
     }
 
@@ -114,7 +129,9 @@ class Report extends Component {
                 <li className="nav-item" onClick={()=>{this.customOnSelect("2")}}>
                   <a className="nav-link" data-toggle="tab" href="#menu1">Por Grupo</a>
                 </li>
-                
+                <li className="nav-item" onClick={()=>{this.customOnSelect("3")}}>
+                  <a className="nav-link" data-toggle="tab" href="#menu2">Por vehículo</a>
+                </li>
               </ul>
 
               <div class="tab-content">
@@ -126,7 +143,7 @@ class Report extends Component {
                       <hr/>
                       <div className="row justify-content-around mb-5">
                         <SurveyGroup api={this.getApi("data1")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Dispositivos","pageSize":10 }}]} />
-                        <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehiculos","pageSize":10 }}]} />
+                        <SurveyGroup api={this.getApi("data2")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehículos","pageSize":10 }}]} />
                       </div>
                       <div className="row justify-content-around mb-5">
                         <SurveyGroup api={this.getApi("data3")} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Actividad","pageSize":10 }}]} />
@@ -142,16 +159,35 @@ class Report extends Component {
                       <hr/>
                       <div className="row justify-content-around mb-5">
                         <SurveyGroup api={this.getApi("data4")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Alertas","pageSize":10 }}]} />
-                        <SurveyGroup api={this.getApi("data5")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehiculos","pageSize":10 }}]} />
+                        <SurveyGroup api={this.getApi("data5")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Top 5 Vehículos","pageSize":10 }}]} />
                       </div>
                       <div className="row justify-content-around mb-5">
-                        <SurveyGroup api={this.getApi("data6")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Velocidad Maxima","pageSize":10 }}]} />
+                        <SurveyGroup api={this.getApi("data6")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Velocidad Máxima","pageSize":10 }}]} />
+                      </div>
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data7")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Exceso Velocidad","pageSize":10 }}]} />
                       </div>
                     </React.Fragment>:null
                 }
                 </div>
-
+                <div id="menu2" class="container-fluid tab-pane fade"><br/>
+                  {this.isActivated('3',this.state.item==3)?
+                    <React.Fragment>
+                      <SurveyForms sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime_g3',placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime_g3',placeHolder:'fecha final',type:'Calendar'}},{SurveyInput:{id:'gid_g3',placeHolder:'Ingrese vehículo',type:'number'}},{SurveyButton:{id:'g3',label:'Buscar',type:'Button'}}]}></SurveyForms>
+                      <hr/>
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data8")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Alertas","pageSize":10 }}]} />
+                      </div>
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data9")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Velocidad Máxima","pageSize":10 }}]} />
+                      </div>
+                      <div className="row justify-content-around mb-5">
+                        <SurveyGroup api={this.getApi("data10")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Exceso de Velocidad","pageSize":10 }}]} />
+                      </div>
+                    </React.Fragment>:null
+                  }
               </div>
+                </div>
             </React.Fragment>
             
           );
