@@ -76,12 +76,11 @@ class Report extends Component {
     receiveColumnClicked=(args)=>{
         switch(args.name){
           case "table_1":
-            console.log(args);
-            this._listControl['gid_g2']={value:args.row[0]};
+            this._listControl['gid_g2']={value:args.row[1]};
             this.setState({itemForce:2},()=>{
                 this.receiveClick('g2');
               });
-            break;
+            break; 
         }
     }
 

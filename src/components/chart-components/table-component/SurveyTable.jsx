@@ -16,7 +16,7 @@ class SurveyTable extends ComponentGeneric {
    componentDidMount()
    {        
       const {feed,labels,key} = this.state;  
-      const {pageSize,handleColumnClick,name}        = this.props;
+      const {pageSize,handleColumnClick,name,columnDefs}        = this.props;
       var self= this;
       if(feed.length>0 && labels.length>0){
          $(document).ready(function() {
@@ -37,12 +37,23 @@ class SurveyTable extends ComponentGeneric {
                "createdRow": self.formatColorCell(),
             });
 
-            $('#table_'+key+' tbody').on('click', 'tr', function () {
-               if(handleColumnClick){
-                  var data = table.row(this).data();
-                  handleColumnClick({'name':name,'row':data});
-               }
-            });
+            
+               $('#table_'+key+' tbody').on('click', 'td', function () {
+                  if(handleColumnClick){
+                     var rowIdx = table
+                     .cell( this )
+                     .index();
+                     var data = table.row( rowIdx.row ).data();
+                     var found = columnDefs.find(element=> {
+                        return element == rowIdx.column;
+                      });                      
+                     if(found!=null){
+                        console.log(data);
+                        handleColumnClick({'name':name,'row':data});
+                     }  
+                  }
+               });
+            
          });         
       } else{
          console.log('feed empty');
@@ -58,9 +69,9 @@ class SurveyTable extends ComponentGeneric {
                (obj,ii)=>{    
                   try {
                      if(obj.needsPaint && obj.type=='numeric'){
-                        let num =(data[ii].replace(/[\$,]/g, '') * 1)/100;
+                        let num =(data[ii].replace(/[\$,]/g, '') * 1);
                         if ( num >= 0 && num < 0.6) {    //High Risk
-                           $('td', row).eq(ii).css({"background-color":colors.highRisk,'font-weight': 'bold'});
+                           $('td', row).eq(ii).css({"background-color":colors.highRisk});
                         }  
                         if ( num >= 0.6 && num < 0.75) {   //Medium Risk
                            $('td', row).eq(ii).css({"background-color":colors.mediumRisk});
