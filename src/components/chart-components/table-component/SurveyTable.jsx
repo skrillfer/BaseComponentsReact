@@ -58,9 +58,19 @@ class SurveyTable extends ComponentGeneric {
             labels.map(
                (obj,ii)=>{    
                   try {
-                     if ( data[ii].replace(/[\$,]/g, '') * 1 > 3 ) {
+                     let num =data[ii].replace(/[\$,]/g, '') * 1;
+                     if ( num >= 0 && num < 0.6) {    //High Risk
                         $('td', row).eq(ii).css({"background-color":colors.colorRed});
                      }  
+                     if ( num >= 0.6 && num < 0.75) {   //Medium Risk
+                        $('td', row).eq(ii).css({"background-color":colors.colorRed});
+                     }  
+                     if ( num >= 0.75 && num < 0.95) {   //Mid Risk
+                        $('td', row).eq(ii).css({"background-color":colors.colorRed});
+                     }  
+                     if ( num >= 0.95 && num <= 1) {   //Low Risk
+                        $('td', row).eq(ii).css({"background-color":colors.colorRed});
+                     } 
                   } catch (error) {
                      
                   }
