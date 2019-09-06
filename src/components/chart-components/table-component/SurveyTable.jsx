@@ -37,22 +37,20 @@ class SurveyTable extends ComponentGeneric {
                "createdRow": self.formatColorCell(),
             });
 
-            
-               $('#table_'+key+' tbody').on('click', 'td', function () {
-                  if(handleColumnClick){
-                     var rowIdx = table
-                     .cell( this )
-                     .index();
-                     var data = table.row( rowIdx.row ).data();
-                     var found = columnDefs.find(element=> {
-                        return element == rowIdx.column;
-                      });                      
-                     if(found!=null){
-                        console.log(data);
-                        handleColumnClick({'name':name,'row':data});
-                     }  
-                  }
-               });
+            $('#table_'+key+' tbody').on('click', 'td', function () {
+               if(handleColumnClick){
+                  var rowIdx = table
+                  .cell( this )
+                  .index();
+                  var data = table.row( rowIdx.row ).data();
+                  var found = columnDefs.find(element=> {
+                     return element == rowIdx.column;
+                     });                      
+                  if(found!=null){
+                     handleColumnClick({'name':name,'row':data});
+                  }  
+               }
+            });
             
          });         
       } else{
@@ -68,7 +66,7 @@ class SurveyTable extends ComponentGeneric {
             labels.map(
                (obj,ii)=>{    
                   try {
-                     if(obj.needsPaint && obj.type=='numeric'){
+                     if(obj.needsPaint==true && obj.type=='numeric'){
                         let num =(data[ii].replace(/[\$,]/g, '') * 1);
                         if ( num >= 0 && num < 0.6) {    //High Risk
                            $('td', row).eq(ii).css({"background-color":colors.highRisk});
