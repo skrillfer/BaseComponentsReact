@@ -37,7 +37,7 @@ class SurveyTable extends ComponentGeneric {
                "createdRow": self.formatColorCell(),
             });
 
-            $('#table_'+key+' tbody').on('click', 'td a', function () {
+            $('#table_'+key+' tbody').on('click', 'tr', function () {
                if(handleColumnClick){
                   var data = table.row(this).data();
                   handleColumnClick({'name':name,'row':data});
