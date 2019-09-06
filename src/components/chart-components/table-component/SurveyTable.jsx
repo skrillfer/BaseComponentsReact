@@ -37,13 +37,12 @@ class SurveyTable extends ComponentGeneric {
                "createdRow": self.formatColorCell(),
             });
 
-            $('#table_'+key+' tbody').on('click', 'tr', function () {
+            $('#table_'+key+' tbody').on('click', 'td a', function () {
                if(handleColumnClick){
                   var data = table.row(this).data();
                   handleColumnClick({'name':name,'row':data});
                }
             });
-
          });         
       } else{
          console.log('feed empty');
@@ -58,11 +57,10 @@ class SurveyTable extends ComponentGeneric {
             labels.map(
                (obj,ii)=>{    
                   try {
-                     
                      if(obj.needsPaint && obj.type=='numeric'){
-                        let num =data[ii].replace(/[\$,]/g, '') * 1/100;
+                        let num =(data[ii].replace(/[\$,]/g, '') * 1)/100;
                         if ( num >= 0 && num < 0.6) {    //High Risk
-                           $('td', row).eq(ii).css({"background-color":colors.highRisk});
+                           $('td', row).eq(ii).css({"background-color":colors.highRisk,'font-weight': 'bold'});
                         }  
                         if ( num >= 0.6 && num < 0.75) {   //Medium Risk
                            $('td', row).eq(ii).css({"background-color":colors.mediumRisk});
@@ -72,22 +70,14 @@ class SurveyTable extends ComponentGeneric {
                         }  
                         if ( num >= 0.95 && num <= 1) {   //Low Risk
                            $('td', row).eq(ii).css({"background-color":colors.lowRisk});
-                        } 
+                        }   
                      }
                   } catch (error) {
-                     
                   }
                }   
             );
          }
       }
-
-      /*
-      td.highlight {
-        font-weight: bold;
-        color: blue;
-      }
-      */
       return null;
    }
 
