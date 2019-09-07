@@ -100,7 +100,22 @@ class Report extends Component {
         }
     }
 
-    receiveClick=(id)=>{   this.setState({currentGroup:id});  }
+   receiveClick=(id)=>{   
+     let itemF=this.state.itemForce;
+     switch(id){
+      case "g1":
+        itemF=1;
+        break;
+      case "g2":
+          itemF=2;
+          break;
+      case "g3":
+          itemF=3;
+          break;     
+     }
+     console.log(this._listControl);
+     this.setState({currentGroup:id,itemForce:itemF}); 
+   }
 
     componentDidUpdate(){
       if(this.state.currentGroup!=''){this.setState({currentGroup:''});}
