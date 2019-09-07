@@ -13,16 +13,19 @@ class Tabs extends Component {
     this.state = {
       activeTab: this.getInitialActiveTab(),
       item:this.props.setTabActive,
+      
     };
     this.listActivates={};
+    this.fromHere=false;
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    if(nextProps.setTabActive!=this.state.item){
+    if(nextProps.setTabActive!=this.state.item && !this.fromHere){
+      
       this.setState({ 
           item:nextProps.setTabActive,
           activeTab:this.getInitialActiveTab(nextProps.setTabActive)
-        });
+      });
     }
     return true;
   }
@@ -35,6 +38,7 @@ class Tabs extends Component {
       }
       return children[setTabActive-1].props.label;  
     } catch (error) {
+      console.log(error);
       return children[0].props.label;  
     }
   }
@@ -59,7 +63,8 @@ class Tabs extends Component {
   }
 
   onClickTabItem = (tab,index) => {
-    this.setState({ activeTab: tab,item: index});
+    this.fromHere=true;
+    this.setState({activeTab: tab,item: index},()=>{this.fromHere=false;});
   }
 
   render() {

@@ -39,15 +39,13 @@ class SurveyTable extends ComponentGeneric {
 
             $('#table_'+key+' tbody').on('click', 'td', function () {
                if(handleColumnClick){
-                  var rowIdx = table
-                  .cell( this )
-                  .index();
+                  var rowIdx = table.cell( this ).index();
                   var data = table.row( rowIdx.row ).data();
                   var found = columnDefs.find(element=> {
                      return element == rowIdx.column;
-                     });                      
+                  });                      
                   if(found!=null){
-                     handleColumnClick({'name':name,'row':data});
+                     handleColumnClick({'name':name,'row':data,'columnClicked':rowIdx.column});
                   }  
                }
             });

@@ -18,6 +18,7 @@ class Tab extends Component {
   }
 
   render() {
+    
     const {
       onClick,
       props: {
@@ -26,12 +27,10 @@ class Tab extends Component {
         index,
       },
     } = this;
-
     let className = 'nav-link';
     if (activeTab === label) {
       className = 'nav-link active';
     }
-
     return (
       <li className="nav-item" onClick={onClick}>
         <a className={className} data-toggle="tab" href={"$tab"+index}>{label}</a>

@@ -17,7 +17,7 @@ class Report extends Component {
       if(this._listControl[id]){
         if(type=='fecha'){ 
             try {
-              return new Date(this._listControl[id].value).toISOString();
+              return new Date(this._listControl[id].value)/*.toISOString()*/;
             } catch (error) {
               return defaul_t;
             }
@@ -61,6 +61,11 @@ class Report extends Component {
                       url:$DS.data1,
                       params:[{report:"speedalarms"},{gid:this.getValueParam('gid_g2','num',"145")},{stime:this.getValueParam('stime_g2','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g2','fecha',this._defaultDates.etime)}]
                     }
+        case "data7":
+            return {
+                      url:$DS.data1,
+                      params:[{report:"topalarm"},{obj:this.getValueParam('objid_g3','num',"4017")},{stime:this.getValueParam('stime_g3','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g3','fecha',this._defaultDates.etime)}]
+                    }
                   
       }
     }
@@ -76,10 +81,21 @@ class Report extends Component {
     receiveColumnClicked=(args)=>{
         switch(args.name){
           case "table_1":
-            this._listControl['gid_g2']={value:args.row[1]};
-            this.setState({itemForce:2},()=>{
-                this.receiveClick('g2');
-              });
+            
+            switch(args.columnClicked){
+              case 0:
+                this._listControl['gid_g2']={value:args.row[1]};
+                this.setState({itemForce:2},()=>{
+                  this.receiveClick('g2');
+                });
+                break;
+              case 2:
+                this._listControl['objid_g3']={value:args.row[3]};
+                this.setState({itemForce:3},()=>{
+                  this.receiveClick('g3');
+                });
+                break;
+            }
             break; 
         }
     }
@@ -110,7 +126,7 @@ class Report extends Component {
                   <SurveyGroup api={this.getApi('data2')} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Top 5 Vehiculos",pageSize:10,columnDefs:[] }}]} />
                 </div>
                 <div className="row justify-content-around mb-5">
-                  <SurveyGroup api={this.getApi('data3')} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Actividad",pageSize:10,columnDefs:[0],handleColumnClick:this.receiveColumnClicked,name:'table_1' }}]} />
+                  <SurveyGroup api={this.getApi('data3')} currentGroup={this.state.currentGroup} keym={'g1'} nColumns =  {[1]} nComponents =  {[{SurveyTable:{ title:"Safety Scorecard",pageSize:10,columnDefs:[0,2],handleColumnClick:this.receiveColumnClicked,name:'table_1' }}]} />
                 </div>
               </React.Fragment>
             </div>
@@ -124,6 +140,15 @@ class Report extends Component {
                 </div>
                 <div className="row justify-content-around mb-5">
                   <SurveyGroup api={this.getApi("data6")} currentGroup={this.state.currentGroup} keym={'g2'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Velocidad Maxima","pageSize":10 }}]} />
+                </div>
+              </React.Fragment>
+            </div>
+            <div label="Por Vehiculo">
+              <React.Fragment>
+                <SurveyForms  sendClick={this.receiveClick} sendControls={this.receiveControls} forms={[{SurveyCalendar:{id:'stime_g3',value:this._defaultDates.stime,placeHolder:'fecha inicial',type:'Calendar'}},{SurveyCalendar:{id:'etime_g3',value:this._defaultDates.etime,placeHolder:'fecha final',type:'Calendar'}},{SurveyInput:{id:'objid_g3',value:this.getValueParam('objid_g3','num',"4017"),placeHolder:'Ingrese vehiculo',type:'number'}},{SurveyButton:{id:'g3',label:'Buscar',type:'Button'}}]}></SurveyForms>
+                <hr/>
+                <div className="row justify-content-around mb-5">
+                  <SurveyGroup api={this.getApi("data7")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Vehiculo","pageSize":10 }}]} />
                 </div>
               </React.Fragment>
             </div>
