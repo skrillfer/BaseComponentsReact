@@ -41,7 +41,7 @@ class SurveyGroup extends GenericGroup {
     }
     
 
-    injectChart(chartName,pageSize,columnDefs,handleColumnClick,name)
+    injectChart(chartName,pageSize,columnDefs,handleColumnClick,name,legend)
     {
         const {labels,feed} = this.state;
         switch(chartName)
@@ -55,6 +55,7 @@ class SurveyGroup extends GenericGroup {
                                 columnDefs={columnDefs} 
                                 handleColumnClick={handleColumnClick}
                                 name ={name}
+                                legend={legend}
                         />
             case "SurveyHis":
                 return <SurveyHis     
@@ -118,7 +119,7 @@ class SurveyGroup extends GenericGroup {
                         let chart = nComponents[count];
                         let objName = Object.keys(chart)[0]
                         
-                        const {title,pageSize,columnDefs,handleColumnClick,name}=chart[objName];
+                        const {title,pageSize,columnDefs,handleColumnClick,name,legend}=chart[objName];
                         containerElements.push(
                             <div className="col">
                                 <div className="card" style={{"display":"display: inline-block"}}>
@@ -126,7 +127,7 @@ class SurveyGroup extends GenericGroup {
                                         <h1 class="display-4">{title}</h1>
                                     </div>
                                     <div className="card-body">
-                                        {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name)}
+                                        {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name,legend)}
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +143,7 @@ class SurveyGroup extends GenericGroup {
             nComponents.map(
                 chart=>{
                     let objName = Object.keys(chart)[0];
-                    const {title,pageSize,columnDefs,handleColumnClick,name}=chart[objName];
+                    const {title,pageSize,columnDefs,handleColumnClick,name,legend}=chart[objName];
                     containerElements.push(
                         <div className="col">
                             <div className="card" style={{"display":"display: inline-block"}}>
@@ -150,7 +151,7 @@ class SurveyGroup extends GenericGroup {
                                     <h1 class="display-4">{title}</h1>
                                 </div>
                                 <div className="card-body">
-                                {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name)}
+                                {this.injectChart(objName,pageSize,columnDefs,handleColumnClick,name,legend)}
                                 </div>
                             </div>
                         </div>

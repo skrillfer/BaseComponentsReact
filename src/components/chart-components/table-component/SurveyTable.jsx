@@ -6,17 +6,19 @@ import { colors } from "../../../constants/color";
 
 import style  from './table.styles.css';
 
+
 class SurveyTable extends ComponentGeneric {
     constructor(props) {
       super(props);
       this.generateCSVFile = this.generateCSVFile.bind(this);
+      this.state['legend'] = this.props.legend;
     }
     
    
    componentDidMount()
    {        
       const {feed,labels,key} = this.state;  
-      const {pageSize,handleColumnClick,name,columnDefs}        = this.props;
+      const {pageSize,handleColumnClick,name,columnDefs} = this.props;
       var self= this;
       if(feed.length>0 && labels.length>0){
          $(document).ready(function() {
@@ -34,7 +36,7 @@ class SurveyTable extends ComponentGeneric {
                         'colvis'
                   ],
                "columnDefs": self.getColumnDefs(),
-               "createdRow": self.formatColorCell(),
+               "createdRow": self.formatColorCell().bind(this),
             });
 
             $('#table_'+key+' tbody').on('click', 'td', function () {
@@ -195,6 +197,16 @@ class SurveyTable extends ComponentGeneric {
                <tbody>
                      {this.renderTableData()}
                </tbody>
+               <tfoot>
+                  <tr style={{"visibility":(this.state.legend ? "visible" : "hidden")}}>
+                     <td>
+                           <span style={{"background-color":colors.highRisk,"color":colors.highRisk,"margin":"3px 3px"}}>HH</span><span>High Risk</span>
+                           <span style={{"background-color":colors.mediumRisk,"color":colors.mediumRisk,"margin":"3px 3px"}}>HH</span><span>Medium Risk</span>
+                           <span style={{"background-color":colors.midRisk,"color":colors.midRisk,"margin":"3px 3px"}}>HH</span><span>Mid Risk</span>
+                           <span style={{"background-color":colors.lowRisk,"color":colors.lowRisk,"margin":"3px 3px"}}>HH</span><span>Low Risk</span>
+                     </td>
+                  </tr>
+               </tfoot>
             </table>
         )
      }
