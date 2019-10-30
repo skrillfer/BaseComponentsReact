@@ -50,6 +50,7 @@ class SurveyTable extends ComponentGeneric {
                      handleColumnClick({'name':name,'row':data,'columnClicked':rowIdx.column});
                   }  
                }
+               return false;
             });
             
          });         

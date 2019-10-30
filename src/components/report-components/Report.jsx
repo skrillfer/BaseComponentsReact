@@ -9,15 +9,40 @@ class Report extends Component {
     constructor(props){
       super(props);
       this.state={itemForce:1,currentGroup:''};
-      this._listControl = [];
+      this._listControl = {};
       this._defaultDates= this.getDefaultDates();
+    }
+
+    parseUrlHash(){
+      let urlHash = window.location.hash;
+      urlHash = urlHash.split('/');
+      if(urlHash.length>0){
+        let stime = this._defaultDates.stime;
+        let etime = this._defaultDates.etime;
+        let param = null;
+        if(urlHash[1]){
+          stime = urlHash[1];
+        }
+        if(urlHash[2]){
+          etime = urlHash[2];
+        }
+        if(urlHash[3]){
+          param = urlHash[3];
+          this._listControl = JSON.parse(decodeURI(param));
+        }
+        this._defaultDates = {"stime":stime,"etime":etime};
+        if(urlHash[0]){
+          let idC = urlHash[0].replace("#","");
+          this.receiveClick(idC);
+        }
+      }
     }
     
     getValueParam(id,type,defaul_t){
       if(this._listControl[id]){
         if(type=='fecha'){ 
             try {
-              return new Date(this._listControl[id].value)/*.toISOString()*/;
+              return new Date(this._listControl[id].value).toISOString();
             } catch (error) {
               return defaul_t;
             }
@@ -86,13 +111,43 @@ class Report extends Component {
                 {stime:this.getValueParam('stime_g3','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g3','fecha',this._defaultDates.etime)}
             ]
           }
+          case "data10":
+          return {
+            "url":$DS.data1,
+            "params":[
+                {report:"alarmevent"},
+                {obj:this.getValueParam('objid_g3','num',"4017")},
+                {at:4170},
+                {stime:this.getValueParam('stime_g3','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g3','fecha',this._defaultDates.etime)}
+            ]
+          }
+          case "data11":
+          return {
+            "url":$DS.data1,
+            "params":[
+                {report:"speedalarms"},
+                {obj:this.getValueParam('objid_g3','num',"4017")},
+                {at:4171},
+                {stime:this.getValueParam('stime_g3','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g3','fecha',this._defaultDates.etime)}
+            ]
+          }
+          case "data12":
+          return {
+            "url":$DS.data1,
+            "params":[
+                {report:"speedalarms"},
+                {obj:this.getValueParam('objid_g3','num',"4017")},
+                {at:4173},
+                {stime:this.getValueParam('stime_g3','fecha',this._defaultDates.stime)},{etime:this.getValueParam('etime_g3','fecha',this._defaultDates.etime)}
+            ]
+          }
       }
     }
 
     getDefaultDates=()=>{
       var today = new Date();
       var previusDate = new Date();
-      previusDate.setDate(today.getDate() - 7);
+      previusDate.setDate(today.getDate() - (today.getDay()-1));
       return {stime:previusDate.toISOString(),etime:today.toISOString()};
     }
 
@@ -127,9 +182,10 @@ class Report extends Component {
             }
             break;
         }
+        return false;
     }
 
-   receiveClick=(id)=>{   
+   receiveClick=(id)=>{  
      let itemF=this.state.itemForce;
      switch(id){
       case "g1":
@@ -142,8 +198,12 @@ class Report extends Component {
           itemF=3;
           break;     
      }
-     console.log(this._listControl);
-     this.setState({currentGroup:id,itemForce:itemF}); 
+     window.location.hash = id+'/'+this._defaultDates.stime+'/'+this._defaultDates.etime+'/'+encodeURI(JSON.stringify(this._listControl));
+     this.setState({currentGroup:id,itemForce:itemF});
+   }
+
+   componentDidMount(){
+    this.parseUrlHash();
    }
 
     componentDidUpdate(){
@@ -156,7 +216,6 @@ class Report extends Component {
 
 
     render(){
-      
       const {itemForce} = this.state;
       return (
         <React.Fragment>
@@ -196,6 +255,15 @@ class Report extends Component {
                 </div>
                 <div className="row justify-content-around mb-5">
                   <SurveyGroup api={this.getApi("data9")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Speed Alarms","pageSize":10 }}]} />
+                </div>
+                <div className="row justify-content-around mb-5">
+                  <SurveyGroup api={this.getApi("data10")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Hard Acceleration","pageSize":10 }}]} />
+                </div>
+                <div className="row justify-content-around mb-5">
+                  <SurveyGroup api={this.getApi("data11")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Harsh Breaking","pageSize":10 }}]} />
+                </div>
+                <div className="row justify-content-around mb-5">
+                  <SurveyGroup api={this.getApi("data12")} currentGroup={this.state.currentGroup} keym={'g3'} nColumns =  {[1]} nComponents =  {[{"SurveyTable":{ "title":"Harsh Cornering","pageSize":10 }}]} />
                 </div>
               </React.Fragment>
             </div>
